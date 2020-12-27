@@ -30,16 +30,15 @@ pipeline {
         }
         stage("Packaging client application") {
             steps {
-                env = ""
-
                 script {
+                    def prod = ""
                     if (env.GIT_BRANCH.equals("prod") || env.GIT_BRANCH.equals("origin/prod")) {
                         prod = "--prod"
                     }
                 }
                 nodejs('node-15.5') {
                     sh 'npm install'
-                    sh 'npm run build $env'
+                    sh 'npm run build $prod'
                 }
             }
         }
