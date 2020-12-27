@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import {PlasmidJsIframeComponent} from './components/plasmid-js-iframe/plasmid-js-iframe.component'
@@ -9,10 +10,11 @@ import {AnalyisisComponent} from './components/analyisis/analyisis.component'
   declarations: [
     AppComponent,
     AnalyisisComponent,
-    PlasmidJsIframeComponent
+    PlasmidJsIframeComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

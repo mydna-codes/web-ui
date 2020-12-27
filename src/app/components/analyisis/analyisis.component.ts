@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {PlasmidJsIframeComponent} from '../plasmid-js-iframe/plasmid-js-iframe.component';
+import {GenesService} from '../../../services/genes.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ export class AnalyisisComponent implements OnInit {
 
   @ViewChild('iframeComponent') iframeComponent: PlasmidJsIframeComponent
 
-  constructor() { }
+  constructor(private genesService: GenesService) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,13 @@ export class AnalyisisComponent implements OnInit {
 
   public sendDataToIframeSource(data){
     this.iframeComponent.sendMessage(data)
+  }
+
+  public async getAllGenes(){
+
+    const allGenes = await  this.genesService.getAll()
+    console.log("all genes", allGenes)
+
   }
 
 }
