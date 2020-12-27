@@ -30,7 +30,7 @@ pipeline {
         }
         stage("Packaging client application") {
             steps {
-                def env = ""
+                env = ""
 
                 script {
                     if (env.GIT_BRANCH.equals("prod") || env.GIT_BRANCH.equals("origin/prod")) {
