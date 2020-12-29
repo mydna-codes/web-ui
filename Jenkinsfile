@@ -12,7 +12,6 @@ pipeline {
         PROJECT_ARTIFACT_ID    = "web-ui"
         COMMIT_AUTHOR          = ""
         COMMIT_MESSAGE         = ""
-        ENVIRONMENT            = ""
     }
 
     tools {
@@ -32,13 +31,14 @@ pipeline {
         stage("Packaging client application") {
             steps {
                 script {
-                    //if (env.GIT_BRANCH.equals("prod") || env.GIT_BRANCH.equals("origin/prod")) {
-                        ENVIRONMENT = "--prod"
-                    //}
+                    def prod = ""
+                    if (env.GIT_BRANCH.equals("prod") || env.GIT_BRANCH.equals("origin/prod")) {
+                        prod = "--prod"
+                    }
                 }
                 nodejs('node-15.5') {
                     sh 'npm install'
-                    sh 'npm run build $ENVIRONMENT'
+                    sh 'npm run build:prod'
                 }
             }
         }
