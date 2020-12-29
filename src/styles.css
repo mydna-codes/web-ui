@@ -1,3 +1,7 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
 html, body {
   width: 100%;
   height: 100%;

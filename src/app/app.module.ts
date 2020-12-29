@@ -6,6 +6,10 @@ import { AppComponent } from './app.component';
 import {PlasmidJsIframeComponent} from './components/plasmid-js-iframe/plasmid-js-iframe.component'
 import {AnalyisisComponent} from './components/analyisis/analyisis.component'
 
+import { NgSelectModule } from '@ng-select/ng-select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +18,10 @@ import {AnalyisisComponent} from './components/analyisis/analyisis.component'
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
