@@ -12,6 +12,7 @@ pipeline {
         PROJECT_ARTIFACT_ID    = "web-ui"
         COMMIT_AUTHOR          = ""
         COMMIT_MESSAGE         = ""
+        ENVIRONMENT            = ""
     }
 
     tools {
@@ -22,23 +23,22 @@ pipeline {
         stage("Set environment variables") {
             steps {
                 script {
-                    COMMIT_MESSAGE       = sh script: "git show -s --pretty='%s'", returnStdout: true
-                    COMMIT_AUTHOR        = sh script: "git show -s --pretty='%cn <%ce>'", returnStdout: true
-                    COMMIT_AUTHOR        = COMMIT_AUTHOR.trim()
+                    COMMIT_MESSAGE = sh script: "git show -s --pretty='%s'", returnStdout: true
+                    COMMIT_AUTHOR  = sh script: "git show -s --pretty='%cn <%ce>'", returnStdout: true
+                    COMMIT_AUTHOR  = COMMIT_AUTHOR.trim()
                 }
             }
         }
         stage("Packaging client application") {
             steps {
                 script {
-                    def prod = ""
                     //if (env.GIT_BRANCH.equals("prod") || env.GIT_BRANCH.equals("origin/prod")) {
-                        prod = "--prod"
+                        ENVIRONMENT = "--prod"
                     //}
                 }
                 nodejs('node-15.5') {
                     sh 'npm install'
-                    sh 'npm run build $prod'
+                    sh 'npm run build $ENVIRONMENT'
                 }
             }
         }
