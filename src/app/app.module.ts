@@ -8,6 +8,7 @@ import {AnalyisisComponent} from './components/analyisis/analyisis.component'
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { GraphQLModule } from './graphql.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule,
     NgSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]

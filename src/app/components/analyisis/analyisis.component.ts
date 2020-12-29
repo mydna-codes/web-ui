@@ -7,6 +7,7 @@ import {DnaEntity} from '../../entities/dna.entity';
 import {EnzymeEntity} from '../../entities/enzyme.entity';
 import {EnzymeService} from '../../services/enzyme.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AnalysisService} from '../../services/analysis.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class AnalyisisComponent implements OnInit {
 
   @ViewChild('iframeComponent') iframeComponent: PlasmidJsIframeComponent;
 
-  constructor(private genesService: GenesService, private dnaService: DnaService, private enzymeService: EnzymeService, private formBuilder: FormBuilder) {
+  constructor(private genesService: GenesService, private dnaService: DnaService, private enzymeService: EnzymeService, private analysisService: AnalysisService) {
   }
 
   /* DATA HOLDERS */
@@ -42,36 +43,55 @@ export class AnalyisisComponent implements OnInit {
     this.allDna = await this.dnaService.getAll();
     this.allEnzymes = await this.enzymeService.getAll();
 
+
   }
-
-
-  message = {msg: 'hello', data: 'test'};
 
   public sendDataToIframeSource(data) {
     this.iframeComponent.sendMessage(data);
   }
 
-  public async getAllGenes() {
-
-    const allGenes = await this.genesService.getAll();
-    console.log('all genes', allGenes);
-
+  public analyze(request: {}){
+    return new Promise((resolve, reject) => {
+      this.analysisService.analyze(request).subscribe((data) => {
+        resolve(data)
+      }, (err) => {
+        reject(err)
+      });
+    })
   }
 
-  public onSubmit(){
+  public async onSubmit(){
     this.submitted = true
-    if(this.plasmidForm.valid)
-      console.log(this.plasmidForm.value)
-  }
+    if(!this.plasmidForm.valid)
+      return
 
-  public log(data: any) {
-    console.log(data);
-  }
+    const request = {
+      dnaId: this.plasmidForm.controls['selectedDnaId'].value,
+      enzymeIds: this.plasmidForm.controls['selectedEnzymesId'].value,
+      geneIds: this.plasmidForm.controls['selectedGenesId'].value
+    };
 
+    try{
+      const data = await this.analyze(request)
+      console.log(data)
+    }catch (e) {
+      console.log("error while fetching data from graphql", e)
+    }
+
+
+  }
 
   /* GETTERS FOR FORMS */
   get selectedDnaId(){
     return this.plasmidForm.get('selectedDnaId')
+  }
+
+  get selectedEnzymesId(){
+    return this.plasmidForm.get('selectedEnzymesId')
+  }
+
+  get selectedGenesId(){
+    return this.plasmidForm.get('selectedGenesId')
   }
 
 }

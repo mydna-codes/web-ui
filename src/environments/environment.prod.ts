@@ -6,5 +6,7 @@ export const environment = {
     dna: 'dna',
     enzyme: 'enzyme',
     gene: 'gene'
-  }
+  },
+  graphQlEndpoint: 'https://analysis-test.mydna.codes/graphql'
+
 };
