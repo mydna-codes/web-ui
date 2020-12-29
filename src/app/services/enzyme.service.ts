@@ -23,13 +23,13 @@ export class EnzymeService {
       .then((res) => {
         return res
       }).catch((err) => {
-        console.log("error fetching all genes", err)
+        console.log("error fetching all enzymes", err)
         return []
       })
   }
 
   public getById(id): Promise<EnzymeEntity>{
-    let url = environment.backendUrl + environment.crudEndpoints.gene + "/" + id
+    let url = environment.backendUrl + environment.crudEndpoints.enzyme + "/" + id
     return this.httpClient.get(url)
       .toPromise()
       .then((res) => {
@@ -38,7 +38,7 @@ export class EnzymeService {
       .then((res) => {
         return res
       }).catch((err) => {
-        console.log("error fetching gene w/ id", id, err)
+        console.log("error fetching enzyme w/ id", id, err)
         return null
       })
   }

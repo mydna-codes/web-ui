@@ -39,7 +39,7 @@ export class AnalysisService {
     return this.apollo.mutate({
       mutation: ANALYSIS_MUTATION,
       variables: {request: request}
-    });
+    }).toPromise();
   }
 
 }
