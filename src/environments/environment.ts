@@ -5,11 +5,12 @@
 
 export const environment = {
   production: false,
-  plasmidJsSrc: 'https://plasmid-js.mydna.codes/',
+  plasmidJsSrc: 'http://localhost:8000/',
   backendUrl: 'https://sequence-bank-test.mydna.codes/v1/',
   crudEndpoints: {
     dna: 'dna',
     enzyme: 'enzyme',
     gene: 'gene'
-  }
+  },
+  graphQlEndpoint: 'https://analysis-test.mydna.codes/graphql'
 };
