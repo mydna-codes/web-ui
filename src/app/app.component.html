@@ -1,1 +1,31 @@
-<app-analyisis></app-analyisis>
+<mat-sidenav-container >
+
+  <mat-sidenav #sidenav mode="side" opened >
+
+    <mat-toolbar>
+      <mat-toolbar-row >
+        WEB-UI
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-nav-list>
+
+      <h2 matSubheader> ROUTES </h2>
+
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">dashboard</mat-icon>
+        Dashboard
+      </a>
+
+      <a mat-list-item routerLink="/analysis" routerLinkActive="active">
+        <mat-icon color="primary" aria-hidden="false" svgIcon="microscope" aria-label="Example home icon"></mat-icon>
+        Analysis
+      </a>
+
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

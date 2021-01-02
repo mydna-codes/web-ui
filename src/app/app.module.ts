@@ -2,28 +2,56 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
+/* COMPONENTS */
 import { AppComponent } from './app.component';
 import {PlasmidJsIframeComponent} from './components/plasmid-js-iframe/plasmid-js-iframe.component'
-import {AnalyisisComponent} from './components/analyisis/analyisis.component'
+import {AnalysisComponent} from './components/analyisis/analysis.component'
 
 import { NgSelectModule } from '@ng-select/ng-select';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { GraphQLModule } from './graphql.module';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+/* ROUTING */
+import {RouterModule, Routes} from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatListModule} from '@angular/material/list';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTabsModule} from '@angular/material/tabs';
+
+const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'analysis', component: AnalysisComponent},
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+]
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnalyisisComponent,
+    AnalysisComponent,
     PlasmidJsIframeComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
     NgSelectModule,
     ReactiveFormsModule,
-    GraphQLModule
+    GraphQLModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatTableModule,
+    MatListModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

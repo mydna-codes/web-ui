@@ -2,7 +2,8 @@ export interface GeneEntity {
   id: string
   name: string
   sequence: {
-    value: string
+    value: string,
+    length: number
   }
 
   lastModified: string
