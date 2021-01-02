@@ -14,10 +14,10 @@ import {CutOrientation} from '../../entities/cutOrientation';
 
 @Component({
   selector: 'app-analyisis',
-  templateUrl: './analyisis.component.html',
-  styleUrls: ['./analyisis.component.css']
+  templateUrl: './analysis.component.html',
+  styleUrls: ['./analysis.component.css']
 })
-export class AnalyisisComponent implements OnInit {
+export class AnalysisComponent implements OnInit {
 
   @ViewChild('iframeComponent') iframeComponent: PlasmidJsIframeComponent;
 
