@@ -1,5 +1,7 @@
 # WebUi
 
+[![Build Status](https://jenkins.din-cloud.com/buildStatus/icon?job=mydnacodes%2Fweb-ui%2Fmaster&subject=CI/CD)](https://jenkins.din-cloud.com/job/mydnacodes/job/web-ui/job/master/)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.5.
 
 ## Development server
