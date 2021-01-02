@@ -2,7 +2,8 @@ export interface EnzymeEntity {
   id: string
   name: string
   sequence: {
-    value: string
+    value: string,
+    length: number
   }
   lowerCut: number
   upperCut: number

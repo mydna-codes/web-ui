@@ -5,17 +5,38 @@ const ANALYSIS_MUTATION = gql`
   mutation analyze ($request: AnalysisRequestInput!){
   analyzeDna(
     request: $request
-  ) {
-    dnaId
+  ){
+    dna {
+      id
+      name
+      sequence {
+        length
+        value
+      }
+    }
     enzymes {
-      enzymeId
+      enzyme {
+        id
+        name
+        sequence {
+          length
+          value
+        }
+      }
       cuts {
         lowerCut
         upperCut
       }
     }
     genes {
-      geneId
+      gene {
+        id
+        name
+        sequence {
+          length
+          value
+        }
+      }
       overlaps {
         fromIndex
         toIndex

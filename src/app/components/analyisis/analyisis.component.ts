@@ -9,6 +9,7 @@ import {EnzymeService} from '../../services/enzyme.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnalysisService} from '../../services/analysis.service';
 import {AnalysisResponseEntity} from '../../entities/analysisResponse.entity';
+import {CutOrientation} from '../../entities/cutOrientation';
 
 
 @Component({
@@ -66,60 +67,55 @@ export class AnalyisisComponent implements OnInit {
     try{
       const response = await this.analysisService.analyze(request) as AnalysisResponseEntity
       if(response && response.data && response.data.analyzeDna){
-        this.showIframe = true
 
         /* parse data */
         let data = response.data.analyzeDna
         let genes = data.genes
         let enzymes = data.enzymes
-        let dnaId = data.dnaId
 
-        let dna = await this.dnaService.getById(dnaId) as DnaEntity
-        dna.sequence["length"] = dna.sequence.value.length
+        /* prepare data for drawing */
+        let overlaps = this.combineOverlaps(genes)
 
-        const resolvedGenes = await this.resolveGenes(genes)
-        const resolvedEnzymes = await this.resolveEnzymes(enzymes)
+        /* send data to iframe */
+        this.sendDataToIframeSource({type:"create", dna: data.dna, enzymes: enzymes, overlaps: overlaps})
+        this.showIframe = true
 
-        this.sendDataToIframeSource({type:"new", dna: dna, enzymes: resolvedEnzymes, genes: resolvedGenes})
       }else{
         this.showIframe = false
       }
     }catch (e) {
-      this.showIframe = true
+      this.showIframe = false
       console.log("error while fetching data from graphql", e)
     }
 
 
   }
 
-  private async resolveGenes(genes: object[]){
+  private combineOverlaps(genes: {overlaps: {fromIndex: number, toIndex: number, orientation: string}[], gene: GeneEntity}[]){
+    let overlaps = []
+    for(const gene of genes)
+      for(const overlap of gene.overlaps){
 
-    for(const index in genes){
-      let gene = genes[index]
-      let fullGene = await this.genesService.getById(gene["geneId"])
-      fullGene["overlaps"] = gene["overlaps"]
-      fullGene.sequence["length"] = fullGene.sequence.value.length
-      genes[index] = fullGene
-    }
+        let {r, g, b} = this.getRandomRGB()
+        overlap["fill"] = "fill:rgba(" + r + "," + g + "," + b + "," + "0.8" + ")"
 
-    return genes
+        overlap["name"] = gene.gene.name
+        overlap["positive"] = overlap.orientation == CutOrientation.POSITIVE
+        overlaps.push(overlap)
 
+      }
+
+    return overlaps
   }
 
-  private async resolveEnzymes(enzymes: object[]){
+  private getRandomRGB(){
+      let r = Math.random()*256|0;
+      let g = Math.random()*256|0;
+      let b = Math.random()*256|0;
 
-    for(const index in enzymes){
-      let enzyme = enzymes[index]
-      let fullEnzyme = await this.enzymeService.getById(enzyme["enzymeId"])
-      fullEnzyme["cuts"] = enzyme["cuts"]
-      fullEnzyme.sequence["length"] = fullEnzyme.sequence.value.length
-      enzymes[index] = fullEnzyme
-    }
-
-    return enzymes
+    return {r:r, g:g, b:g}
 
   }
-
 
   /* GETTERS FOR FORMS */
   get selectedDnaId(){
