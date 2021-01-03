@@ -1,79 +1,41 @@
+<!-- Smaller cards -->
 <div class="row">
-  <div class="col-md-4 col-sm-12 ">
-    <div class="card text-center">
+  <div class="col-md-4 col-sm-12 " *ngFor="let graph of graphs; let i = index">
+    <div class="card text-center" style="height: 100%" >
       <div class="card-body">
-        <h1 class="card-title">DNA</h1>
-        <p class="card-text">14 / 25</p>
+        <h1 class="card-title">{{graph.name}}</h1>
+        <p class="card-text">{{graph.description}}</p>
         <div class="">
           <canvas baseChart
-                  [datasets]="lineChartData"
+                  [datasets]="graph.data"
                   [labels]="lineChartLabels"
                   [options]="lineChartOptions"
                   [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
+                  [legend]="false"
+                  [chartType]="'line'"
+                  >
           </canvas>
         </div>
-        <a href="#" class="btn btn-primary">View All</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-12 ">
-    <div class="card text-center">
-      <div class="card-body">
-        <h3 class="card-title">ENZYMES</h3>
-        <p class="card-text">10 / 120</p>
-        <div class="">
-          <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
-        </div>
-        <a href="#" class="btn btn-primary">View All</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-12 ">
-    <div class="card text-center">
-      <div class="card-body">
-        <h3 class="card-title">GENES</h3>
-        <p class="card-text">10 / 50</p>
-        <div class="">
-          <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
-        </div>
-        <a href="#" class="btn btn-primary">View All</a>
+        <a (click)="setMainContent(i)" class="btn btn-primary">View All</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Main (currently selected) card -->
 <div class="row pt-4">
-
   <div class="col-12">
     <div class="card text-center">
       <div class="card-body">
-        <h3 class="card-title">Analysis History</h3>
+        <h3 class="card-title">{{mainGraph.name}}</h3>
+        <p class="card-text">{{mainGraph.description }}</p>
         <div class="chartjs-block">
           <canvas baseChart
-                  [datasets]="lineChartData"
+                  [datasets]="mainGraph.data"
                   [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
+                  [options]="lineChartOptionsMain"
                   [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
+                  [legend]="false"
                   [chartType]="lineChartType"
                   [plugins]="lineChartPlugins">
           </canvas>
