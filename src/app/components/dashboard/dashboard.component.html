@@ -1,4 +1,88 @@
-dashboard component
-<div class="mat-background-warn">
-    asd
+<div class="row">
+  <div class="col-md-4 col-sm-12 ">
+    <div class="card text-center">
+      <div class="card-body">
+        <h1 class="card-title">DNA</h1>
+        <p class="card-text">14 / 25</p>
+        <div class="">
+          <canvas baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+        <a href="#" class="btn btn-primary">View All</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-12 ">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="card-title">ENZYMES</h3>
+        <p class="card-text">10 / 120</p>
+        <div class="">
+          <canvas baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+        <a href="#" class="btn btn-primary">View All</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-12 ">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="card-title">GENES</h3>
+        <p class="card-text">10 / 50</p>
+        <div class="">
+          <canvas baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+        <a href="#" class="btn btn-primary">View All</a>
+      </div>
+    </div>
+  </div>
 </div>
+
+<div class="row pt-4">
+
+  <div class="col-12">
+    <div class="card text-center">
+      <div class="card-body">
+        <h3 class="card-title">Analysis History</h3>
+        <div class="chartjs-block">
+          <canvas baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [colors]="lineChartColors"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType"
+                  [plugins]="lineChartPlugins">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
