@@ -14,7 +14,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 /* ROUTING */
 import {RouterModule, Routes} from '@angular/router';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+/* ANGULAR MATERIAL */
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
@@ -22,6 +25,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
+
+/* CHARTS */
+import {ChartsModule} from 'ng2-charts'
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -51,7 +57,8 @@ const routes: Routes = [
     MatListModule,
     MatToolbarModule,
     MatIconModule,
-    MatTabsModule
+    MatTabsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
