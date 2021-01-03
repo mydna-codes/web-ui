@@ -21,22 +21,11 @@ export class DashboardComponent implements OnInit {
     this.mainGraph = temp;
   }
 
-  lineChartData1: ChartDataSets[] = [
-    {data: [85, 72, 78, 75, 77, 75],},
-  ];
-
-  lineChartData2: ChartDataSets[] = [
-    {data: [85, 72, 78, 75, 77, 75],},
-  ];
-
-  lineChartData3: ChartDataSets[] = [
-    {data: [85, 72, 78, 75, 77, 75],},
-  ];
 
   graphs = [
     {
       data: [
-        { data: [85, 72, 78, 75, 77, 75] }
+        { data: [85, 72, 28, 45, 67, 50] }
       ],
       name: 'DNA',
       current: 10,
@@ -45,7 +34,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       data: [
-        { data: [85, 72, 78, 75, 77, 75] }
+        { data: [85, 32, 98, 75, 107, 75] }
       ],
       name: 'ENZYMES',
       current: 50,
@@ -54,7 +43,7 @@ export class DashboardComponent implements OnInit {
     },
     {
       data: [
-        { data: [85, 72, 78, 75, 77, 75] }
+        { data: [65, 72, 73, 64, 83, 75] }
       ],
       name: 'GENES',
       current: 15,
@@ -65,7 +54,7 @@ export class DashboardComponent implements OnInit {
 
   mainGraph = {
     data: [
-      { data: [85, 72, 78, 75, 77, 75] }
+      { data: [10, 0, 4, 12, 2, 0] }
     ],
     name: 'Analysis',
     current: null,
@@ -73,11 +62,7 @@ export class DashboardComponent implements OnInit {
     description: 'description'
   }
 
-  lineChartDataMain: ChartDataSets[] = [
-    {data: [85, 72, 68, 32, 45, 60],},
-  ];
 
-  graphData = [this.lineChartData1, this.lineChartData2, this.lineChartData3];
 
   lineChartLabels: Label[] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun'];
 
