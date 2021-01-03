@@ -1,3 +1,4 @@
+
 <!-- Smaller cards -->
 <div class="row">
   <div class="col-md-4 col-sm-12 " *ngFor="let graph of graphs; let i = index">
@@ -25,23 +26,61 @@
 <!-- Main (currently selected) card -->
 <div class="row pt-4">
   <div class="col-12">
-    <div class="card text-center">
-      <div class="card-body">
-        <h3 class="card-title">{{mainGraph.name}}</h3>
-        <p class="card-text">{{mainGraph.description }}</p>
-        <div class="chartjs-block">
-          <canvas baseChart
-                  [datasets]="mainGraph.data"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptionsMain"
-                  [colors]="lineChartColors"
-                  [legend]="false"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true" >
+        <mat-expansion-panel-header>
+          {{mainGraph.name}} graph
+        </mat-expansion-panel-header>
+        <div class="card text-center">
+          <div class="card-body">
+            <p class="card-text">{{mainGraph.description }}</p>
+            <div>
+              <canvas baseChart
+                      [datasets]="mainGraph.data"
+                      [labels]="lineChartLabels"
+                      [options]="lineChartOptionsMain"
+                      [colors]="lineChartColors"
+                      [legend]="false"
+                      [chartType]="lineChartType"
+                      [plugins]="lineChartPlugins">
+              </canvas>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+</div>
+
+<!-- List of all entities -->
+<div class="row pt-4" *ngIf="mainEntities.length > 0">
+  <div class="col-12">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="true" >
+        <mat-expansion-panel-header>
+          List of all DNA-s
+        </mat-expansion-panel-header>
+        <div>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let entity of mainEntities; let i = index">
+              <th scope="row">{{i}}</th>
+              <td>{{entity.name}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
 
 </div>

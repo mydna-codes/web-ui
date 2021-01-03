@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartDataSets} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
+import {DnaService} from '../../services/dna.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +10,12 @@ import {Color, Label} from 'ng2-charts';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {
+  constructor(private dnaService: DnaService) {
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.mainEntities = await this.dnaService.getAll()
+    console.log(this.mainEntities)
   }
 
   public setMainContent(currentPosition: number) {
@@ -62,7 +65,7 @@ export class DashboardComponent implements OnInit {
     description: 'description'
   }
 
-
+  mainEntities = []
 
   lineChartLabels: Label[] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun'];
 
