@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChartDataSets} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 import {DnaService} from '../../services/dna.service';
+import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +15,18 @@ export class DashboardComponent implements OnInit {
   }
 
   async ngOnInit() {
+
+    this.setContentLoaded(false)
+
     this.mainEntities = await this.dnaService.getAll()
     console.log(this.mainEntities)
+    setTimeout(() => {
+      this.setContentLoaded(true)
+    }, 2000)
+  }
+
+  setContentLoaded(loaded: boolean){
+    this.contentLoaded = loaded
   }
 
   public setMainContent(currentPosition: number) {
@@ -24,6 +35,7 @@ export class DashboardComponent implements OnInit {
     this.mainGraph = temp;
   }
 
+  contentLoaded
 
   graphs = [
     {

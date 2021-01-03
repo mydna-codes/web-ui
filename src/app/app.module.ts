@@ -29,6 +29,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 /* CHARTS */
 import {ChartsModule} from 'ng2-charts'
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -60,7 +61,8 @@ const routes: Routes = [
     MatIconModule,
     MatTabsModule,
     ChartsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
