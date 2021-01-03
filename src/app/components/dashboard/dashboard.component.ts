@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import {Component, OnInit} from '@angular/core';
+import {ChartDataSets} from 'chart.js';
+import {Color, Label} from 'ng2-charts';
+import {DnaService} from '../../services/dna.service';
+import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,31 +11,111 @@ import { Color, Label } from 'ng2-charts';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private dnaService: DnaService) {
   }
 
-  lineChartData: ChartDataSets[] = [
-    { data: [85, 72, 78, 75, 77, 75],},
+  async ngOnInit() {
+
+    this.setContentLoaded(false)
+
+    this.mainEntities = await this.dnaService.getAll()
+    console.log(this.mainEntities)
+    setTimeout(() => {
+      this.setContentLoaded(true)
+    }, 2000)
+  }
+
+  setContentLoaded(loaded: boolean){
+    this.contentLoaded = loaded
+  }
+
+  public setMainContent(currentPosition: number) {
+    const temp = this.graphs[currentPosition];
+    this.graphs[currentPosition] = this.mainGraph;
+    this.mainGraph = temp;
+  }
+
+  contentLoaded
+
+  graphs = [
+    {
+      data: [
+        { data: [85, 72, 28, 45, 67, 50] }
+      ],
+      name: 'DNA',
+      current: 10,
+      max: 50,
+      description: "10 / 50"
+    },
+    {
+      data: [
+        { data: [85, 32, 98, 75, 107, 75] }
+      ],
+      name: 'ENZYMES',
+      current: 50,
+      max: 120,
+      description: "50 / 120"
+    },
+    {
+      data: [
+        { data: [65, 72, 73, 64, 83, 75] }
+      ],
+      name: 'GENES',
+      current: 15,
+      max: 50,
+      description: "15 / 50"
+    }
   ];
 
-  lineChartLabels: Label[] = ['', '', '', '', '', ''];
+  mainGraph = {
+    data: [
+      { data: [10, 0, 4, 12, 2, 0] }
+    ],
+    name: 'Analysis',
+    current: null,
+    max: null,
+    description: 'description'
+  }
+
+  mainEntities = []
+
+  lineChartLabels: Label[] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun'];
 
   lineChartOptions = {
     responsive: true,
     scales: {
       xAxes: [{
         gridLines: {
-          display:false
+          display: false
+        },
+        ticks: {
+          display: false
         }
       }],
       yAxes: [{
         gridLines: {
-          display:false
+          display: false
         },
         ticks: {
-          display:false
+          display: false
+        }
+      }]
+    }
+  };
+  lineChartOptionsMain = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        gridLines: {
+          display: true
+        },
+        ticks: {
+          display: true
         }
       }]
     }
@@ -45,7 +127,6 @@ export class DashboardComponent implements OnInit {
     },
   ];
 
-  lineChartLegend = false;
   lineChartPlugins = [];
   lineChartType = 'line';
 

@@ -1,88 +1,96 @@
-<div class="row">
-  <div class="col-md-4 col-sm-12 ">
-    <div class="card text-center">
-      <div class="card-body">
-        <h1 class="card-title">DNA</h1>
-        <p class="card-text">14 / 25</p>
-        <div class="">
-          <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
-        </div>
-        <a href="#" class="btn btn-primary">View All</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-12 ">
-    <div class="card text-center">
-      <div class="card-body">
-        <h3 class="card-title">ENZYMES</h3>
-        <p class="card-text">10 / 120</p>
-        <div class="">
-          <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
-        </div>
-        <a href="#" class="btn btn-primary">View All</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 col-sm-12 ">
-    <div class="card text-center">
-      <div class="card-body">
-        <h3 class="card-title">GENES</h3>
-        <p class="card-text">10 / 50</p>
-        <div class="">
-          <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
-        </div>
-        <a href="#" class="btn btn-primary">View All</a>
-      </div>
-    </div>
-  </div>
+
+<div *ngIf="!contentLoaded" class="d-flex justify-content-center" style="height: 100%">
+  <mat-spinner class="align-self-center"></mat-spinner>
 </div>
+<div *ngIf="contentLoaded">
 
-<div class="row pt-4">
-
-  <div class="col-12">
-    <div class="card text-center">
-      <div class="card-body">
-        <h3 class="card-title">Analysis History</h3>
-        <div class="chartjs-block">
-          <canvas baseChart
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  [plugins]="lineChartPlugins">
-          </canvas>
+  <!-- Smaller cards -->
+  <div class="row">
+    <div class="col-md-4 col-sm-12 " *ngFor="let graph of graphs; let i = index">
+      <div class="card text-center" style="height: 100%" >
+        <div class="card-body">
+          <h1 class="card-title">{{graph.name}}</h1>
+          <p class="card-text">{{graph.description}}</p>
+          <div class="">
+            <canvas baseChart
+                    [datasets]="graph.data"
+                    [labels]="lineChartLabels"
+                    [options]="lineChartOptions"
+                    [colors]="lineChartColors"
+                    [legend]="false"
+                    [chartType]="'line'"
+            >
+            </canvas>
+          </div>
+          <a (click)="setMainContent(i)" class="btn btn-primary">View All</a>
         </div>
       </div>
     </div>
   </div>
 
-</div>
+  <!-- Main (currently selected) card -->
+  <div class="row pt-4">
+    <div class="col-12">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true" >
+          <mat-expansion-panel-header>
+            {{mainGraph.name}} graph
+          </mat-expansion-panel-header>
+          <div class="card text-center">
+            <div class="card-body">
+              <p class="card-text">{{mainGraph.description }}</p>
+              <div>
+                <canvas baseChart
+                        [datasets]="mainGraph.data"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptionsMain"
+                        [colors]="lineChartColors"
+                        [legend]="false"
+                        [chartType]="lineChartType"
+                        [plugins]="lineChartPlugins">
+                </canvas>
+              </div>
+            </div>
+          </div>
 
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+  </div>
+
+  <!-- List of all entities -->
+  <div class="row pt-4" *ngIf="mainEntities.length > 0">
+    <div class="col-12">
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true" >
+          <mat-expansion-panel-header>
+            List of all DNA-s
+          </mat-expansion-panel-header>
+          <div>
+            <table class="table">
+              <thead class="bg-mat-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let entity of mainEntities; let i = index">
+                <th scope="row">{{i}}</th>
+                <td>{{entity.name}}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+  </div>
+
+
+</div>
 
 
