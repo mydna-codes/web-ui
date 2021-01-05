@@ -19,34 +19,18 @@
 
           </div>
           <p class="card-text">{{graph.description}}</p>
-          <div class="">
-            <canvas baseChart
-                    [datasets]="graph.data"
-                    [labels]="lineChartLabels"
-                    [options]="lineChartOptions"
-                    [colors]="lineChartColors"
-                    [legend]="false"
-                    [chartType]="'line'"
-            >
-            </canvas>
-          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Main (currently selected) card -->
-  <div class="row pt-4">
+  <div class="row pt-4 d-flex justify-content-center">
     <div class="col-12">
-      <mat-accordion>
-        <mat-expansion-panel [expanded]="true" >
-          <mat-expansion-panel-header>
-            {{mainGraph.name}} graph
-          </mat-expansion-panel-header>
           <div class="card text-center">
             <div class="card-body">
               <p class="card-text">{{mainGraph.description }}</p>
-              <div>
+              <div style="">
                 <canvas baseChart
                         [datasets]="mainGraph.data"
                         [labels]="lineChartLabels"
@@ -60,43 +44,9 @@
             </div>
           </div>
 
-        </mat-expansion-panel>
-      </mat-accordion>
     </div>
 
   </div>
-
-  <!-- List of all entities -->
-  <div class="row pt-4" *ngIf="mainEntities.length > 0">
-    <div class="col-12">
-      <mat-accordion>
-        <mat-expansion-panel [expanded]="true" >
-          <mat-expansion-panel-header>
-            List of all DNA-s
-          </mat-expansion-panel-header>
-          <div>
-            <table class="table">
-              <thead class="bg-mat-primary">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let entity of mainEntities; let i = index">
-                <th scope="row">{{i}}</th>
-                <td>{{entity.name}}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-
-  </div>
-
 
 </div>
 

@@ -7,5 +7,16 @@ mat-sidenav, mat-sidenav-content {
 }
 
 mat-sidenav {
-  width: 20%;
+}
+
+.flexExpand {
+  flex: 1 1 auto;
+}
+
+.flexSpaceBetween {
+  justify-content: space-between;
+}
+
+a{
+  color: white;
 }

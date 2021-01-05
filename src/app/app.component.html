@@ -1,10 +1,10 @@
-<mat-sidenav-container >
+<mat-sidenav-container>
 
-  <mat-sidenav #sidenav mode="side" opened >
+  <mat-sidenav style="" #sidenav mode="side">
 
-    <mat-toolbar>
-      <mat-toolbar-row >
-        WEB-UI
+    <mat-toolbar class="bg-white">
+      <mat-toolbar-row>
+        <span class="">WEB-UI</span>
       </mat-toolbar-row>
     </mat-toolbar>
 
@@ -14,18 +14,84 @@
 
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">dashboard</mat-icon>
-        Dashboard
+        <span class="d-none d-lg-block">Dashboard</span>
       </a>
 
       <a mat-list-item routerLink="/analysis" routerLinkActive="active">
         <mat-icon color="primary" aria-hidden="false" svgIcon="microscope" aria-label="Example home icon"></mat-icon>
-        Analysis
+        <span class="d-none d-lg-block">Analysis</span>
+
+      </a>
+
+
+      <a mat-list-item  routerLinkActive="active">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">storage</mat-icon>
+        <span class="d-none d-lg-block">Storage</span>
+
       </a>
 
     </mat-nav-list>
 
   </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
+  <mat-sidenav-content class="pt-0 pl-0 pr-0" style="">
+    <!--
+    <mat-toolbar  class=" w-100 flexSpaceBetween" color="primary">
+
+      <div>
+        <span>
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        </span>
+        <span>
+        My Application
+          </span>
+      </div>
+
+      <div>
+        <span class="pr-2">AAA</span>
+        <span class="pr-2">BBB</span>
+        <span style="padding-right: 10rem">CCC</span>
+        <span>DDD</span>
+      </div>
+
+
+
+    </mat-toolbar>
+    -->
+    <nav class="navbar navbar-expand bg-mat-primary">
+
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+
+      </div>
+      <div class="mx-auto order-0">
+        <a class="d-none d-lg-block navbar-brand mx-auto navbar-collapse collapse" >MyDna Codes</a>
+      </div>
+
+      <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item pr-2">
+            <mat-icon class="mt-1" aria-hidden="false" aria-label="Example dashboard icon">settings</mat-icon>
+          </li>
+          <li class="nav-item pr-2">
+            <mat-icon class="mt-1" aria-hidden="false" aria-label="Example dashboard icon">notification_important</mat-icon>
+          </li>
+          <li>
+            <mat-icon class="mt-1" aria-hidden="false" aria-label="Example dashboard icon">account_circle</mat-icon>
+          </li>
+        </ul>
+      </div>
+
+
+
+    </nav>
+    <div style="background-color: #f6f8fb; height: 100%" [ngClass]="{'dim': sidenav.opened}">
+      <div class="pl-3 pt-3" style="background-color: #f6f8fb;height: 100%; max-width: 99%">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

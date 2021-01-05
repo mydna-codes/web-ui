@@ -9,3 +9,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: white;
   background-color: #673ab7
 }
+
+.dim {
+  background:#000;
+  opacity:0.5;
+}
+
+
