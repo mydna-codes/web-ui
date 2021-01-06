@@ -23,42 +23,17 @@
 
       </a>
 
-
-      <a mat-list-item  routerLinkActive="active">
+      <a mat-list-item routerLink="/storage" routerLinkActive="active">
         <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">storage</mat-icon>
         <span class="d-none d-lg-block">Storage</span>
-
       </a>
 
     </mat-nav-list>
 
   </mat-sidenav>
   <mat-sidenav-content class="pt-0 pl-0 pr-0" style="">
-    <!--
-    <mat-toolbar  class=" w-100 flexSpaceBetween" color="primary">
 
-      <div>
-        <span>
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        </span>
-        <span>
-        My Application
-          </span>
-      </div>
-
-      <div>
-        <span class="pr-2">AAA</span>
-        <span class="pr-2">BBB</span>
-        <span style="padding-right: 10rem">CCC</span>
-        <span>DDD</span>
-      </div>
-
-
-
-    </mat-toolbar>
-    -->
+    <!-- Top Bar -->
     <nav class="navbar navbar-expand bg-mat-primary">
 
       <button mat-icon-button (click)="sidenav.toggle()">
@@ -73,13 +48,13 @@
 
       <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item pr-2">
+          <li class="nav-item pr-2" data-toggle="modal" data-target="#settingsModal" style="cursor: pointer">
             <mat-icon class="mt-1" aria-hidden="false" aria-label="Example dashboard icon">settings</mat-icon>
           </li>
           <li class="nav-item pr-2">
             <mat-icon class="mt-1" aria-hidden="false" aria-label="Example dashboard icon">notification_important</mat-icon>
           </li>
-          <li>
+          <li class="nav-item pr-2" data-toggle="modal" data-target="#accountModal" style="cursor: pointer">
             <mat-icon class="mt-1" aria-hidden="false" aria-label="Example dashboard icon">account_circle</mat-icon>
           </li>
         </ul>
@@ -88,10 +63,57 @@
 
 
     </nav>
-    <div style="background-color: #f6f8fb; height: 100%" [ngClass]="{'dim': sidenav.opened}">
+
+    <!-- Modals -->
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            SETTINGS GO HERE
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account Modal -->
+    <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" >Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            ACCOUNT SETTINGS GO HERE
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of modals -->
+
+    <!-- Application Content -->
+    <div class="" style="background-color: #f6f8fb; height: 100%" [ngClass]="{'dim': sidenav.opened}">
       <div class="pl-3 pt-3" style="background-color: #f6f8fb;height: 100%; max-width: 99%">
         <router-outlet></router-outlet>
       </div>
     </div>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
