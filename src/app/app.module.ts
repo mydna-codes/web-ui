@@ -30,10 +30,12 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {ChartsModule} from 'ng2-charts'
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { StorageComponent } from './components/storage/storage.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'analysis', component: AnalysisComponent},
+  { path: 'storage', component: StorageComponent},
   { path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 ]
 
@@ -43,6 +45,7 @@ const routes: Routes = [
     AnalysisComponent,
     PlasmidJsIframeComponent,
     DashboardComponent,
+    StorageComponent,
   ],
   imports: [
     BrowserModule,
