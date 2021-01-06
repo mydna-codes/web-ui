@@ -23,42 +23,15 @@
 
       </a>
 
-
       <a mat-list-item routerLink="/storage" routerLinkActive="active">
         <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">storage</mat-icon>
         <span class="d-none d-lg-block">Storage</span>
-
       </a>
 
     </mat-nav-list>
 
   </mat-sidenav>
   <mat-sidenav-content class="pt-0 pl-0 pr-0" style="">
-    <!--
-    <mat-toolbar  class=" w-100 flexSpaceBetween" color="primary">
-
-      <div>
-        <span>
-        <button mat-icon-button (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        </span>
-        <span>
-        My Application
-          </span>
-      </div>
-
-      <div>
-        <span class="pr-2">AAA</span>
-        <span class="pr-2">BBB</span>
-        <span style="padding-right: 10rem">CCC</span>
-        <span>DDD</span>
-      </div>
-
-
-
-    </mat-toolbar>
-    -->
 
     <!-- Top Bar -->
     <nav class="navbar navbar-expand bg-mat-primary">
@@ -133,6 +106,7 @@
         </div>
       </div>
     </div>
+    <!-- End of modals -->
 
     <!-- Application Content -->
     <div class="" style="background-color: #f6f8fb; height: 100%" [ngClass]="{'dim': sidenav.opened}">
