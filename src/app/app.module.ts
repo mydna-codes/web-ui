@@ -73,7 +73,14 @@ const routes: Routes = [
     MatExpansionModule,
     MatProgressSpinnerModule
   ],
-  providers: [{provide: APP_INITIALIZER, useFactory: initKeycloak, multi: true, deps: [KeycloakService]}],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
