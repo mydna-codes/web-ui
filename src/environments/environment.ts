@@ -12,5 +12,11 @@ export const environment = {
     enzyme: 'enzyme',
     gene: 'gene'
   },
-  graphQlEndpoint: 'https://analysis-test.mydna.codes/graphql'
+  graphQlEndpoint: 'https://analysis-test.mydna.codes/graphql',
+  keycloak: {
+    url: "https://keycloak.din-cloud.com/auth/",
+    realm: "mydnacodes",
+    client: "mydnacodes-public"
+  }
 };
+

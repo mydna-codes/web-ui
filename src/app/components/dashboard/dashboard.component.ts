@@ -3,6 +3,7 @@ import {ChartDataSets} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 import {DnaService} from '../../services/dna.service';
 import {timeout} from 'rxjs/operators';
+import {KeycloakService} from "@procempa/ngx-keycloak";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ import {timeout} from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private dnaService: DnaService) {
+  constructor(private dnaService: DnaService, private keyCloakService: KeycloakService) {
   }
 
   async ngOnInit() {
@@ -23,6 +24,10 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.setContentLoaded(true)
     }, 2000)
+  }
+
+  public login(){
+    this.keyCloakService.login()
   }
 
   setContentLoaded(loaded: boolean){
