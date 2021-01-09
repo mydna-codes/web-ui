@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ChartDataSets} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 import {DnaService} from '../../services/dna.service';
-import {timeout} from 'rxjs/operators';
 import {KeycloakService} from "@procempa/ngx-keycloak";
 
 @Component({
