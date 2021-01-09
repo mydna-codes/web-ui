@@ -43,4 +43,49 @@ export class EnzymeService {
       })
   }
 
+  public createNew(name: string, sequenceValue: string, upperCut: number, lowerCut: number){
+
+    const enzyme = {name: name, sequence: {value: sequenceValue}, upperCut: upperCut, lowerCut: lowerCut}
+
+    let url = environment.backendUrl + environment.crudEndpoints.enzyme
+    return this.httpClient.post(url, enzyme)
+      .toPromise()
+      .then((res) => {
+        return res as EnzymeEntity;
+      })
+      .catch((err) => {
+        console.log("error creating enzyme", err)
+        return null
+      })
+  }
+
+  public edit(id: number, name: string, sequenceValue: string, upperCut: number, lowerCut: number){
+
+    const enzyme = {name: name, sequence: {value: sequenceValue}, upperCut: upperCut, lowerCut: lowerCut}
+
+    let url = environment.backendUrl + environment.crudEndpoints.enzyme + "/" + id
+    return this.httpClient.put(url, enzyme)
+      .toPromise()
+      .then((res) => {
+        return res as EnzymeEntity;
+      })
+      .catch((err) => {
+        console.log("error updating enzyme", err)
+        return null
+      })
+  }
+
+  public deleteById(id :number){
+    let url = environment.backendUrl + environment.crudEndpoints.enzyme + "/" + id
+    return this.httpClient.delete(url)
+      .toPromise()
+      .then((res) => {
+        return res;
+      }).catch((err) => {
+        console.log("error deleting enzyme w/ id", id, err)
+        return null
+      })
+  }
+
+
 }

@@ -23,6 +23,7 @@ export class StorageComponent implements OnInit {
   public selectedEntityType
   public selectedEntity
   public entityList
+  public selectedEntityIndex
 
   public contentLoaded
   public formReady: boolean
@@ -60,9 +61,87 @@ export class StorageComponent implements OnInit {
       return this.entityList = this.enzymes
   }
 
-  onSubmit(f: NgForm) {
-    console.log(f.value)
-    console.log(this.selectedEntity)
+  async editEntity(f: NgForm) {
+
+    if(!f.valid)
+      return alert("all inputs are required (temporary)")
+
+    let response
+    if(this.selectedEntityType == "dna"){
+      response = await this.dnaService.edit(this.selectedEntity.id, f.value.name, f.value.sequence)
+      if(response)
+        this.dnas[this.selectedEntityIndex] = response
+    }else if(this.selectedEntityType == "enzyme"){
+      response = await this.enzymeService.edit(this.selectedEntity.id, f.value.name, f.value.sequence, f.value.upperCut, f.value.lowerCut)
+      if(response)
+        this.enzymes[this.selectedEntityIndex] = response
+    }else if(this.selectedEntityType == "gene"){
+      response = await this.geneService.edit(this.selectedEntity.id, f.value.name, f.value.sequence)
+      if(response)
+        this.genes[this.selectedEntityIndex] = response
+    }
+
+    if(response){
+      this.setEntityList(this.selectedEntityType)
+    }else{
+      alert("error creating" + f.value)
+    }
+
+
+  }
+
+  async createEntity(f: NgForm) {
+
+    if(!f.valid)
+      return alert("all inputs are required (temporary)")
+
+    let response
+    if(this.selectedEntityType == "dna"){
+      response = await this.dnaService.createNew(f.value.name, f.value.sequence)
+      if(response)
+        this.dnas.push(response)
+    }else if(this.selectedEntityType == "enzyme"){
+      response = await this.enzymeService.createNew(f.value.name, f.value.sequence, f.value.upperCut, f.value.lowerCut)
+      if(response)
+        this.enzymes.push(response)
+    }else if(this.selectedEntityType == "gene"){
+      response = await this.geneService.createNew(f.value.name, f.value.sequence)
+      if(response)
+        this.genes.push(response)
+    }
+
+    if(response){
+      this.setEntityList(this.selectedEntityType)
+    }else{
+      alert("error creating" + f.value)
+    }
+
+
+  }
+
+  async deleteEntity(){
+
+    let response
+    if(this.selectedEntityType == "dna"){
+      response = await this.dnaService.deleteById(this.selectedEntity.id)
+      if(response)
+        this.dnas.splice(this.selectedEntityIndex, 1)
+    }else if(this.selectedEntityType == "enzyme"){
+      response = await this.enzymeService.deleteById(this.selectedEntity.id)
+      if(response)
+        this.enzymes.splice(this.selectedEntityIndex, 1)
+    }else if(this.selectedEntityType == "gene"){
+      response = await this.geneService.deleteById(this.selectedEntity.id)
+      if(response)
+        this.genes.splice(this.selectedEntityIndex, 1)
+    }
+
+    if(response){
+      this.setEntityList(this.selectedEntityType)
+    }else{
+      alert("error deleting" + this.selectedEntity)
+    }
+
   }
 
   async openEdit(entity: any) {

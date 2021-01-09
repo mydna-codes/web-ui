@@ -43,4 +43,49 @@ export class GenesService {
       })
   }
 
+  public createNew(name: string, sequenceValue: string){
+
+    const gene = {name: name, sequence: {value: sequenceValue}}
+
+    let url = environment.backendUrl + environment.crudEndpoints.gene
+    return this.httpClient.post(url, gene)
+      .toPromise()
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log("error creating gene", err)
+        return null
+      })
+  }
+
+  public edit(id: number, name: string, sequenceValue: string){
+
+    const gene = {name: name, sequence: {value: sequenceValue}}
+
+    let url = environment.backendUrl + environment.crudEndpoints.gene + "/" + id
+    return this.httpClient.put(url, gene)
+      .toPromise()
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log("error updating gene", err)
+        return null
+      })
+  }
+
+  public deleteById(id :number){
+    let url = environment.backendUrl + environment.crudEndpoints.gene + "/" + id
+    return this.httpClient.delete(url)
+      .toPromise()
+      .then((res) => {
+        return res as GeneEntity;
+      }).catch((err) => {
+        console.log("error deleting gene w/ id", id, err)
+        return null
+      })
+  }
+
+
 }
