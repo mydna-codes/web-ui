@@ -65,9 +65,9 @@
   <nav class="navbar navbar-light bg-primary justify-content-between">
 
     <div>
-      <button (click)="setEntityList('dna')" class="btn bg-white text-dark mr-md-2 mr-1 btn-outline-dark" type="submit">DNA</button>
-      <button (click)="setEntityList('enzyme')" class="btn bg-white text-dark mr-md-2 mr-1 btn-outline-dark" type="submit">ENZYMES</button>
-      <button (click)="setEntityList('gene')" class="btn bg-white text-dark btn-outline-dark" type="submit">GENES</button>
+      <button [ngClass]="selectedEntityType == 'dna' ? 'bg-mat-primary' : 'bg-white'" (click)="setEntityList('dna')" class="btn  mr-md-2 mr-1 " type="submit">DNA</button>
+      <button [ngClass]="selectedEntityType == 'enzyme' ? 'bg-mat-primary' : 'bg-white'" (click)="setEntityList('enzyme')" class="btn  mr-md-2 mr-1 " type="submit">ENZYMES</button>
+      <button [ngClass]="selectedEntityType == 'gene' ? 'bg-mat-primary' : 'bg-white'" (click)="setEntityList('gene')" class="btn  " type="submit">GENES</button>
     </div>
 
     <div class="form-inline">
