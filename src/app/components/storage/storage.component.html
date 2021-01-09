@@ -4,12 +4,55 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Info about the selected {{selectedEntityType}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <form class=""  #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+          <div class="form-group height-transition"  *ngIf="formReady">
+
+            <label form="name"> Name</label>
+            <input disabled ngModel="{{selectedEntity.name}}" name="name" type="text" class="form-control mb-2" id="name" placeholder="Name">
+
+            <label form="sequence"> Sequence</label>
+            <input disabled ngModel="{{selectedEntity.sequence.value}}" name="sequence" type="text" class="form-control" id="sequence" placeholder="Sequence">
+
+
+            <div *ngIf="selectedEntityType == 'enzyme'" class="mt-2">
+
+              <div class="form-row align-items-center">
+
+                <div class="col-6">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Upper Cut</div>
+                    </div>
+                    <input disabled ngModel="{{selectedEntity.upperCut}}" name="upperCut" type="number" aria-describedby="upperCutHelp" class="form-control " id="lowerCut" placeholder="Lower Cut">
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Lower Cut</div>
+                    </div>
+                    <input disabled ngModel="{{selectedEntity.lowerCut}}" name="lowerCut" type="number" aria-describedby="lowerCutHelp" class="form-control" id="upperCut" placeholder="Upper Cut">
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          <div *ngIf="!formReady" class="d-flex justify-content-center" style="height: 100%">
+            <mat-spinner [diameter]="50" class="align-self-center"></mat-spinner>
+          </div>
+
+        </form>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -33,7 +76,7 @@
           <div class="form-group height-transition"  *ngIf="formReady">
 
             <label form="name"> Name</label>
-            <input ngModel="{{selectedEntity.name}}" name="name" type="text" class="form-control mb-2" id="name" placeholder="Name">
+            <input  ngModel="{{selectedEntity.name}}" name="name" type="text" class="form-control mb-2" id="name" placeholder="Name">
 
             <label form="sequence"> Sequence</label>
             <input ngModel="{{selectedEntity.sequence.value}}" name="sequence" type="text" class="form-control" id="sequence" placeholder="Sequence">
@@ -134,13 +177,13 @@
       <td class="pt-4" style="font-size: 1.2rem; width: 50%">{{entity.name}}</td>
       <td style="width: 25%">
         <div style="float: right" class="pt-2">
-          <mat-icon (click)="selectedEntity = entity" data-toggle="modal" data-target="#infoModal"
+          <mat-icon (click)="openEdit(entity)"  data-toggle="modal" data-target="#infoModal"
                     style="vertical-align: center" class="image-size text-primary">info
           </mat-icon>
           <mat-icon (click)="openEdit(entity)" data-toggle="modal" data-target="#editModal"
                     style="vertical-align: center" color="accent" class="image-size">edit
           </mat-icon>
-          <mat-icon (click)="selectedEntity = entity" data-toggle="modal" data-target="#deleteModal"
+          <mat-icon (click)="openEdit(entity)"  data-toggle="modal" data-target="#deleteModal"
                     style="vertical-align: center" color="warn" class="image-size">delete
           </mat-icon>
         </div>
