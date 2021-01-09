@@ -6,22 +6,43 @@
 
     <!-- Smaller cards -->
     <div class="row">
-      <div class="col-md-4 col-sm-12 " *ngFor="let graph of graphs; let i = index">
+
+      <div class="col-md-4 col-sm-12 ">
         <div class="card text-center" style="height: 100%">
           <div class="card-body">
             <div class="row">
               <div class="col-md-6 col-12">
-                <h1 class="card-title" style="text-align: left">{{graph.name}}</h1>
+                <h1 class="card-title" style="text-align: left">DNA</h1>
               </div>
-              <div class="col-md-6 col-12" style="text-align: right">
-                <a (click)="setMainContent(i)" class="btn btn-sm btn-primary">View All</a>
-              </div>
-
             </div>
-            <p class="card-text">{{graph.description}}</p>
           </div>
         </div>
       </div>
+
+      <div class="col-md-4 col-sm-12 ">
+        <div class="card text-center" style="height: 100%">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <h1 class="card-title" style="text-align: left">ENZYMES</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-sm-12 ">
+        <div class="card text-center" style="height: 100%">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <h1 class="card-title" style="text-align: left">GENES</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Main (currently selected) card -->

@@ -1,6 +1,7 @@
 <div class="full-size d-flex justify-content-center">
 
-  <form [hidden]="showIframe" [formGroup]="plasmidForm" (ngSubmit)="onSubmit()" class="border border-primary px-2 py-2" style="width: 50%; align-self: center">
+  <form [hidden]="showIframe" [formGroup]="plasmidForm" (ngSubmit)="onSubmit()" class="border border-primary px-2 py-2"
+        style="width: 50%; align-self: center">
 
 
     <!-- Dna Selection -->
@@ -38,11 +39,12 @@
                formControlName="selectedGenesId">
     </ng-select>
 
-    <button class="btn btn-primary" type="submit" >Submit</button>
+    <button class="btn btn-primary" type="submit">Submit</button>
 
   </form>
 
-  <app-plasmid-js-iframe style="width: 450px; height: 450px; align-self: center" [hidden]="!showIframe" #iframeComponent></app-plasmid-js-iframe>
+  <app-plasmid-js-iframe style="width: 450px; height: 450px; align-self: center" [hidden]="!showIframe"
+                         #iframeComponent></app-plasmid-js-iframe>
 
 </div>
 
