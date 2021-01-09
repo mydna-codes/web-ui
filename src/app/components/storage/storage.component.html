@@ -28,17 +28,41 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="putForm" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <form class="" id="putForm" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
 
-          <div class="form-group" *ngIf="formReady">
+          <div class="form-group height-transition"  *ngIf="formReady">
+
+            <label form="name"> Name</label>
             <input ngModel="{{selectedEntity.name}}" name="name" type="text" class="form-control mb-2" id="name" placeholder="Name">
+
+            <label form="sequence"> Sequence</label>
             <input ngModel="{{selectedEntity.sequence.value}}" name="sequence" type="text" class="form-control" id="sequence" placeholder="Sequence">
-            <div *ngIf="selectedEntityType == 'enzyme'">
-              <div class="input-group my-2">
-                <input ngModel="{{selectedEntity.upperCut}}" name="upperCut" type="number" class="form-control " id="lowerCut" placeholder="Lower Cut">
-                <span class="input-group-addon px-2"></span>
-                <input ngModel="{{selectedEntity.lowerCut}}" name="lowerCut" type="number" class="form-control" id="upperCut" placeholder="Upper Cut">
+
+
+            <div *ngIf="selectedEntityType == 'enzyme'" class="mt-2">
+
+              <div class="form-row align-items-center">
+
+                <div class="col-6">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Upper Cut</div>
+                    </div>
+                    <input ngModel="{{selectedEntity.upperCut}}" name="upperCut" type="number" aria-describedby="upperCutHelp" class="form-control " id="lowerCut" placeholder="Lower Cut">
+                  </div>
+                </div>
+
+                <div class="col-6">
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Lower Cut</div>
+                    </div>
+                    <input ngModel="{{selectedEntity.lowerCut}}" name="lowerCut" type="number" aria-describedby="lowerCutHelp" class="form-control" id="upperCut" placeholder="Upper Cut">
+                  </div>
+                </div>
+
               </div>
+
             </div>
           </div>
           <div *ngIf="!formReady" class="d-flex justify-content-center" style="height: 100%">

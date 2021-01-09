@@ -33,13 +33,14 @@ export class StorageComponent implements OnInit {
 
     /* RETRIEVE DATA */
     this.dnas = await this.dnaService.getAll()
+    this.setEntityList("dna")
+
     this.enzymes = await this.enzymeService.getAll()
     this.genes = await this.geneService.getAll()
 
     this.contentLoaded = true
 
     /* SET SELECTED ENTITY TYPE */
-    this.setEntityList("dna")
 
     console.log("DNAs:", this.dnas)
     console.log("ENZYMES:", this.enzymes)

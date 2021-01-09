@@ -3,3 +3,6 @@
   cursor: pointer;
 }
 
+.height-transition {
+  transition: max-height 5s ease-in;
+}
