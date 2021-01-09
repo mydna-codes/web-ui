@@ -39,8 +39,8 @@ import {initKeycloak} from "./factories/fatories";
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'analysis', component: AnalysisComponent, canActivate: [KeycloakAuthGuard]},
-  {path: 'storage', component: StorageComponent, canActivate: [KeycloakAuthGuard]},
+  {path: 'analysis', component: AnalysisComponent},
+  {path: 'storage', component: StorageComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 ]
 

@@ -34,43 +34,7 @@ export class DashboardComponent implements OnInit {
     this.contentLoaded = loaded
   }
 
-  public setMainContent(currentPosition: number) {
-    const temp = this.graphs[currentPosition];
-    this.graphs[currentPosition] = this.mainGraph;
-    this.mainGraph = temp;
-  }
-
-  contentLoaded
-
-  graphs = [
-    {
-      data: [
-        { data: [85, 72, 28, 45, 67, 50] }
-      ],
-      name: 'DNA',
-      current: 10,
-      max: 50,
-      description: "10 / 50"
-    },
-    {
-      data: [
-        { data: [85, 32, 98, 75, 107, 75] }
-      ],
-      name: 'ENZYMES',
-      current: 50,
-      max: 120,
-      description: "50 / 120"
-    },
-    {
-      data: [
-        { data: [65, 72, 73, 64, 83, 75] }
-      ],
-      name: 'GENES',
-      current: 15,
-      max: 50,
-      description: "15 / 50"
-    }
-  ];
+  public contentLoaded
 
   mainGraph = {
     data: [
@@ -86,27 +50,6 @@ export class DashboardComponent implements OnInit {
 
   lineChartLabels: Label[] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun'];
 
-  lineChartOptions = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          display: false
-        }
-      }],
-      yAxes: [{
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          display: false
-        }
-      }]
-    }
-  };
   lineChartOptionsMain = {
     responsive: true,
     scales: {
