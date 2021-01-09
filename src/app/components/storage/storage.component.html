@@ -10,12 +10,11 @@
         </button>
       </div>
       <div class="modal-body">
-        INFO GOES HERE
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
+
     </div>
   </div>
 </div>
@@ -23,17 +22,34 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Update the details of the selected {{selectedEntityType}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        PUT FORM GOES HERE
+        <form id="putForm" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+          <div class="form-group" *ngIf="formReady">
+            <input ngModel="{{selectedEntity.name}}" name="name" type="text" class="form-control mb-2" id="name" placeholder="Name">
+            <input ngModel="{{selectedEntity.sequence.value}}" name="sequence" type="text" class="form-control" id="sequence" placeholder="Sequence">
+            <div *ngIf="selectedEntityType == 'enzyme'">
+              <div class="input-group my-2">
+                <input ngModel="{{selectedEntity.upperCut}}" name="upperCut" type="number" class="form-control " id="lowerCut" placeholder="Lower Cut">
+                <span class="input-group-addon px-2"></span>
+                <input ngModel="{{selectedEntity.lowerCut}}" name="lowerCut" type="number" class="form-control" id="upperCut" placeholder="Upper Cut">
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!formReady" class="d-flex justify-content-center" style="height: 100%">
+            <mat-spinner [diameter]="50" class="align-self-center"></mat-spinner>
+          </div>
+
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" form="putForm" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>
@@ -97,7 +113,7 @@
           <mat-icon (click)="selectedEntity = entity" data-toggle="modal" data-target="#infoModal"
                     style="vertical-align: center" class="image-size text-primary">info
           </mat-icon>
-          <mat-icon (click)="selectedEntity = entity" data-toggle="modal" data-target="#editModal"
+          <mat-icon (click)="openEdit(entity)" data-toggle="modal" data-target="#editModal"
                     style="vertical-align: center" color="accent" class="image-size">edit
           </mat-icon>
           <mat-icon (click)="selectedEntity = entity" data-toggle="modal" data-target="#deleteModal"

@@ -5,8 +5,8 @@ import {EnzymeEntity} from '../../entities/enzyme.entity';
 import {GeneEntity} from '../../entities/gene.entity';
 import {EnzymeService} from '../../services/enzyme.service';
 import {GenesService} from '../../services/genes.service';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import {FormControl, FormGroup, NgForm} from '@angular/forms';
+
 
 @Component({
   selector: 'app-storage',
@@ -25,6 +25,7 @@ export class StorageComponent implements OnInit {
   public entityList
 
   public contentLoaded
+  public formReady: boolean
 
   async ngOnInit() {
 
@@ -58,4 +59,24 @@ export class StorageComponent implements OnInit {
       return this.entityList = this.enzymes
   }
 
+  onSubmit(f: NgForm) {
+    console.log(f.value)
+    console.log(this.selectedEntity)
+  }
+
+  async openEdit(entity: any) {
+
+    this.formReady = false
+
+    if(this.selectedEntityType == "dna")
+       this.selectedEntity = await this.dnaService.getById(entity.id)
+    else if(this.selectedEntityType == "gene")
+      this.selectedEntity = await this.geneService.getById(entity.id)
+    else if(this.selectedEntityType == "enzyme")
+      this.selectedEntity = await this.enzymeService.getById(entity.id)
+
+    this.formReady = true
+
+    console.log(this.selectedEntity)
+  }
 }
