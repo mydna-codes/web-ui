@@ -1,47 +1,66 @@
-<div class="full-size d-flex justify-content-center">
+<div style="max-width: 100%;">
+  <div class="row no-gutters">
 
-  <form [hidden]="showIframe" [formGroup]="plasmidForm" (ngSubmit)="onSubmit()" class="border border-primary px-2 py-2"
-        style="width: 50%; align-self: center">
-
-
-    <!-- Dna Selection -->
-    <ng-select [items]="allDna"
-               required="true"
-               placeholder="Select Dna *"
-               bindLabel="name"
-               bindValue="id"
-               formControlName="selectedDnaId">
-    </ng-select>
-
-    <div *ngIf="submitted && selectedDnaId.invalid"
-         class="alert alert-danger small">
-
-      <div *ngIf="selectedDnaId.errors.required">
-        Please select a dna sequence
+    <div class="card col-6">
+      <div class="card-header">
+        <div class="card-title text-center m-0">Card title</div>
+      </div>
+      <table *ngIf="contentLoaded" class="table w-100 table-hover">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th class=""> &nbsp;
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr [ngClass]="highlightedIndexes[this.step].includes(i) ? 'bg-success': ''" (click)="toggleEntity(entity, i)"
+            *ngFor="let entity of entityList; let i = index">
+          <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
+          <td class="pt-4" style="font-size: 1.2rem; width: 50%">{{entity.name}}</td>
+          <td style="width: 25%">
+            <div style="float: right" class="pt-2">
+              <!--
+              <mat-icon (click)="openEdit(entity); selectedEntityIndex = i"  data-toggle="modal" data-target="#infoModal"
+                        style="vertical-align: center" class="image-size text-primary">info
+              </mat-icon>
+              -->
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="card-footer p-0">
+        <button *ngIf="step < 3" (click)="nextStep()" [disabled]="(step == 1 && !selectedDna)" class="btn btn-primary"
+                style="float: right"> Continue
+        </button>
+        <button *ngIf="step == 3" (click)="analyze()" [disabled]="(step == 1 && !selectedDna)" class="btn btn-primary"
+                style="float: right"> Analyze
+        </button>
+        <button (click)="previousStep()" [disabled]="step == 1" class="btn btn-primary" style="float: left"> Back</button>
       </div>
     </div>
 
-    <!-- Enzyme Selection -->
-    <ng-select [items]="allEnzymes"
-               placeholder="Select Enzymes"
-               multiple="true"
-               bindLabel="name"
-               bindValue="id"
-               formControlName="selectedEnzymesId">
-    </ng-select>
+    <div class="card col-6">
+      <div class="card-header">
+        <div class="card-title text-center m-0">Card title</div>
+      </div>
+      <div class="card-body p-0">
+        Selected Dna : <span *ngIf="selectedDna">{{selectedDna.name}}</span>
+        <br>
+        Selected Enzymes : <span
+        *ngFor="let enzyme of selectedEnzymes; let last = last"> {{enzyme.name}}{{last ? '' : ','}} </span>
+        <br>
+        Selected Genes : <span
+        *ngFor="let gene of selectedGenes; let last = last"> {{gene.name}}{{last ? '' : ','}} </span>
+      </div>
+    </div>
 
-    <!-- Gene Selection -->
-    <ng-select [items]="allGenes"
-               placeholder="Select Genes"
-               multiple="true"
-               bindLabel="name"
-               bindValue="id"
-               formControlName="selectedGenesId">
-    </ng-select>
+  </div>
+</div>
 
-    <button class="btn btn-primary" type="submit">Submit</button>
-
-  </form>
+<div [hidden]="!showIframe" class="full-size d-flex bg-light">
 
   <app-plasmid-js-iframe style="width: 450px; height: 450px; align-self: center" [hidden]="!showIframe"
                          #iframeComponent></app-plasmid-js-iframe>
