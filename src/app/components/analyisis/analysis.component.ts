@@ -84,18 +84,15 @@ export class AnalysisComponent implements OnInit {
   public toggleEntity(entity: any, index: number) {
 
     let indexInSelectedArray = this.highlightedIndexes[this.step].indexOf(index);
-    console.log(indexInSelectedArray, 'is highlighted ? ');
-
-
     if (indexInSelectedArray > -1) {
 
       this.highlightedIndexes[this.step].splice(indexInSelectedArray, 1);
       if (this.step == 1) {
         this.selectedDna = null;
       } else if (this.step == 2) {
-        this.selectedEnzymes.splice(index, 1);
+        this.selectedEnzymes.splice(indexInSelectedArray, 1);
       } else if (this.step == 3) {
-        this.selectedGenes.splice(index, 1);
+        this.selectedGenes.splice(indexInSelectedArray, 1);
       }
 
     } else {
