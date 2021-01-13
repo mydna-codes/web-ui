@@ -8,6 +8,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'web-ui';
+  private sidebarOpened = true
 
   constructor(private matIconRegistry: MatIconRegistry,private domSanitizer: DomSanitizer) {
 
@@ -18,6 +19,7 @@ export class AppComponent {
     );
 
   }
+
   ngOnInit(){
   }
 

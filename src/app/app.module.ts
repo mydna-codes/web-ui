@@ -36,12 +36,14 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {StorageComponent} from './components/storage/storage.component';
 import {initKeycloak} from "./factories/fatories";
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  {path: 'home', component: HomeComponent },
   {path: 'dashboard', component: DashboardComponent},
   {path: 'analysis', component: AnalysisComponent},
   {path: 'storage', component: StorageComponent},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+  {path: '', redirectTo: '/home', pathMatch: 'full'}
 ]
 
 @NgModule({
@@ -51,6 +53,7 @@ const routes: Routes = [
     PlasmidJsIframeComponent,
     DashboardComponent,
     StorageComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

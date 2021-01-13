@@ -14,12 +14,21 @@ body {
 
 .bg-mat-primary {
   color: white;
-  background-color: #673ab7
+  background-color: black;
+}
+
+.bg-mat-accent {
+  background-color: rgba(255, 229, 0, 0.63);
+  color: black;
+}
+
+.bg-mat-secondary {
+  background-color: #757575;
 }
 
 .dim {
   background: #000;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .modal-backdrop {
@@ -29,5 +38,6 @@ body {
 .modal {
   background: rgba(0, 0, 0, 0.5)
 }
+
 
 

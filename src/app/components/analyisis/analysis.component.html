@@ -1,4 +1,4 @@
-<div style="max-width: 100%;">
+<div [hidden]="showIframe" style="max-width: 100%;">
   <div class="row no-gutters">
 
     <div class="card col-6">
@@ -60,7 +60,7 @@
   </div>
 </div>
 
-<div [hidden]="!showIframe" class="full-size d-flex bg-light">
+<div [hidden]="!showIframe" class="full-size justify-content-center d-flex bg-light">
 
   <app-plasmid-js-iframe style="width: 450px; height: 450px; align-self: center" [hidden]="!showIframe"
                          #iframeComponent></app-plasmid-js-iframe>

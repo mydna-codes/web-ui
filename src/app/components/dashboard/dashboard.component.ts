@@ -16,12 +16,8 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
 
     this.setContentLoaded(false)
-
     this.mainEntities = await this.dnaService.getAll()
-    console.log(this.mainEntities)
-    setTimeout(() => {
-      this.setContentLoaded(true)
-    }, 2000)
+    this.setContentLoaded(true)
   }
 
   public login(){
@@ -41,7 +37,7 @@ export class DashboardComponent implements OnInit {
     name: 'Analysis',
     current: null,
     max: null,
-    description: 'description'
+    description: 'GRAPH DESCRIPTION'
   }
 
   mainEntities = []
@@ -69,7 +65,7 @@ export class DashboardComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      backgroundColor: '#673ab7',
+      backgroundColor: 'rgba(103,58,183,0.67)',
     },
   ];
 

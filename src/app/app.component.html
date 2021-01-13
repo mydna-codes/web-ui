@@ -12,6 +12,11 @@
 
       <h2 matSubheader> ROUTES </h2>
 
+      <a mat-list-item routerLink="/home" routerLinkActive="active">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">home</mat-icon>
+        <span class="d-none d-lg-block">Home</span>
+      </a>
+
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">dashboard</mat-icon>
         <span class="d-none d-lg-block">Dashboard</span>
@@ -30,13 +35,24 @@
 
     </mat-nav-list>
 
+    <mat-nav-list style="position: absolute; bottom: 10pt">
+
+
+      <a mat-list-item routerLink="/storage" routerLinkActive="active">
+        <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">logout</mat-icon>
+        <span class="d-none d-lg-block">Log out</span>
+      </a>
+
+    </mat-nav-list>
+
+
   </mat-sidenav>
   <mat-sidenav-content class="pt-0 pl-0 pr-0" style="">
 
     <!-- Top Bar -->
     <nav class="navbar navbar-expand bg-mat-primary">
 
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button  (click)="sidenav.toggle();">
         <mat-icon>menu</mat-icon>
       </button>
       <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
@@ -109,9 +125,9 @@
     <!-- End of modals -->
 
     <!-- Application Content -->
-    <div class="" style="background-color: #f6f8fb; height: 100%" [ngClass]="{'dim': sidenav.opened}">
-      <div class="pl-3 pt-3" style="background-color: #f6f8fb;height: 100%; max-width: 99%">
-        <router-outlet></router-outlet>
+    <div (click)="sidenav.opened ? sidenav.toggle() && $event.preventDefault() : ''" class="" style="background-color: #f6f8fb; height: 100%" [ngClass]="{'dim': sidenav.opened}">
+      <div (click)="sidenav.opened ? sidenav.toggle() && $event.preventDefault() : ''" [ngClass]="{'unclickable': sidenav.opened}" class="pl-4 pt-3" style="background-color: #f6f8fb;height: 100%; max-width: 98%">
+        <router-outlet style="pointer-events: none"></router-outlet>
       </div>
     </div>
 
