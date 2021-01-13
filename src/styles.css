@@ -14,16 +14,16 @@ body {
 
 .bg-mat-primary {
   color: white;
-  background-color: #673ab7
+  background-color: black;
 }
 
 .bg-mat-accent {
-  background-color: #ffc107;
-  color: white;
+  background-color: rgba(255, 229, 0, 0.63);
+  color: black;
 }
 
 .bg-mat-secondary {
-  background-color: #BDBDBD;
+  background-color: #757575;
 }
 
 .dim {
