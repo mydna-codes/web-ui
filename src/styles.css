@@ -17,6 +17,15 @@ body {
   background-color: #673ab7
 }
 
+.bg-mat-accent {
+  background-color: #ffc107;
+  color: white;
+}
+
+.bg-mat-secondary {
+  background-color: #BDBDBD;
+}
+
 .dim {
   background: #000;
   opacity: 0.4;
@@ -29,5 +38,6 @@ body {
 .modal {
   background: rgba(0, 0, 0, 0.5)
 }
+
 
 

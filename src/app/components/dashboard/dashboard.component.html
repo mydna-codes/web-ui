@@ -4,15 +4,18 @@
   </div>
   <div *ngIf="contentLoaded">
 
-    <!-- Smaller cards -->
+    <!-- Smaller cards for DNA GENES & ENZYMES -->
     <div class="row">
 
       <div class="col-md-4 col-sm-12 ">
         <div class="card text-center" style="height: 100%">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6 col-12">
-                <h1 class="card-title" style="text-align: left">DNA</h1>
+              <div class="col-12">
+                <h1 class="bg-mat-accent card-title w100 text-center">DNAs</h1>
+              </div>
+              <div class="col-12">
+                <h4 class="mb-0 card-title w100 text-center">5/25</h4>
               </div>
             </div>
           </div>
@@ -23,8 +26,11 @@
         <div class="card text-center" style="height: 100%">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6 col-12">
-                <h1 class="card-title" style="text-align: left">ENZYMES</h1>
+              <div class="col-12">
+                <h1 class="bg-mat-accent card-title w100 text-center">ENZYMES</h1>
+              </div>
+              <div class="col-12">
+                <h4 class="mb-0 card-title w100 text-center">5/100</h4>
               </div>
             </div>
           </div>
@@ -35,8 +41,11 @@
         <div class="card text-center" style="height: 100%">
           <div class="card-body">
             <div class="row">
-              <div class="col-md-6 col-12">
-                <h1 class="card-title" style="text-align: left">GENES</h1>
+              <div class="col-12">
+                <h1 class="bg-mat-accent card-title w100 text-center">GENES</h1>
+              </div>
+              <div class="col-12">
+                <h4 class="mb-0 card-title w100 text-center">5/50</h4>
               </div>
             </div>
           </div>
@@ -45,12 +54,12 @@
 
     </div>
 
-    <!-- Main (currently selected) card -->
-    <div class="row pt-4 d-flex justify-content-center">
-      <div class="col-12">
+    <!-- GRAPH AND ANALYSIS HISTORY -->
+    <div class="row pt-4 d-flex">
+      <div class="col-8">
         <div class="card text-center">
           <div class="card-body">
-            <p class="card-text">{{mainGraph.description }}</p>
+            <h1 class="bg-mat-accent card-text">{{mainGraph.description }}</h1>
             <div style="">
               <canvas baseChart
                       [datasets]="mainGraph.data"
@@ -62,6 +71,46 @@
                       [plugins]="lineChartPlugins">
               </canvas>
             </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-4">
+        <div class="card text-center h-100">
+          <div class="card-body h-100">
+            <h1  class="card-text bg-mat-accent">ANALYSIS HISTORY</h1>
+            <table class="table w-100 table-hover">
+              <thead class="thead-light ">
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td scope="row" style="width: 25%" class="pt-4">1.1.1000</td>
+                <td class="pt-4" style="font-size: 1rem; width: 50%">Analysis name</td>
+              </tr>
+              <tr>
+                <td scope="row" style="width: 25%" class="pt-4">1.1.1000</td>
+                <td class="pt-4" style="font-size: 1rem; width: 50%">Analysis name</td>
+              </tr>
+              <tr>
+                <td scope="row" style="width: 25%" class="pt-4">1.1.1000</td>
+                <td class="pt-4" style="font-size: 1rem; width: 50%">Analysis name</td>
+              </tr>
+              <tr>
+                <td scope="row" style="width: 25%" class="pt-4">1.1.1000</td>
+                <td class="pt-4" style="font-size: 1rem; width: 50%">Analysis name</td>
+              </tr>
+              <tr>
+                <td scope="row" style="width: 25%" class="pt-4">1.1.1000</td>
+                <td class="pt-4" style="font-size: 1rem; width: 50%">Analysis name</td>
+              </tr>
+
+              </tbody>
+            </table>
           </div>
         </div>
 
