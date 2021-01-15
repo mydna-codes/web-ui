@@ -5,7 +5,7 @@ import {GeneEntity} from '../../entities/gene.entity';
 import {DnaService} from '../../services/dna.service';
 import {DnaEntity} from '../../entities/dna.entity';
 import {EnzymeService} from '../../services/enzyme.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnalysisService} from '../../services/analysis.service';
 import {AnalysisResponseEntity} from '../../entities/analysisResponse.entity';
 import {CutOrientation} from '../../entities/cutOrientation';
@@ -20,8 +20,17 @@ export class AnalysisComponent implements OnInit {
 
   @ViewChild('iframeComponent') iframeComponent: PlasmidJsIframeComponent;
 
-  constructor(private genesService: GenesService, private dnaService: DnaService, private enzymeService: EnzymeService, private analysisService: AnalysisService) {
+  constructor(private _formBuilder: FormBuilder, private genesService: GenesService, private dnaService: DnaService, private enzymeService: EnzymeService, private analysisService: AnalysisService) {
   }
+  firstFormGroup: FormGroup = new FormGroup({
+    firstName: new FormControl()
+  });
+  secondFormGroup: FormGroup = new FormGroup({
+    firstName: new FormControl()
+  });
+
+  isEditable = true;
+
 
   /* DATA HOLDERS */
   public allGenes: GeneEntity[];
@@ -48,6 +57,7 @@ export class AnalysisComponent implements OnInit {
     selectedGenesId: new FormControl('')
   });
 
+
   public submitted = false;
   public showIframe = false;
 
@@ -60,6 +70,7 @@ export class AnalysisComponent implements OnInit {
     this.allGenes = await this.genesService.getAll();
     this.allEnzymes = await this.enzymeService.getAll();
 
+    console.log(this.allDna)
 
   }
 
@@ -80,6 +91,26 @@ export class AnalysisComponent implements OnInit {
       this.entityList = this.allEnzymes;
     }
   }
+
+  public stepChange(event: any){
+
+
+    let selectedStep = event.selectedIndex + 1
+
+    /* IF ON FINAL STEP */
+    if(selectedStep > 3)
+      return
+
+    /* CHANGE STEPS UNTIL THE RIGHT ONE IS DISPLAYED */
+    while (selectedStep != this.step){
+      if(selectedStep > this.step)
+        this.nextStep()
+      else
+        this.previousStep()
+    }
+  }
+
+
 
   public toggleEntity(entity: any, index: number) {
 
