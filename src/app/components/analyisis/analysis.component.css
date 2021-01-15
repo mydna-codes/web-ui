@@ -6,3 +6,11 @@ td {
   padding: 0;
   margin: 0;
 }
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
