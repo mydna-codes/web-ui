@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {EnzymeEntity} from '../entities/enzyme.entity';
 
@@ -13,12 +13,14 @@ export class EnzymeService {
 
   }
 
-  public getAll(): Promise<EnzymeEntity[]>{
+  public getAll(offset: number = 0): Promise<EnzymeEntity[]>{
     let url = environment.backendUrl + environment.crudEndpoints.enzyme
-    return this.httpClient.get(url)
+
+    let params = new HttpParams().set("limit", "2").set("offset", offset.toString())
+    return this.httpClient.get(url, {observe: 'response', params: params})
       .toPromise()
       .then((res) => {
-        return res as EnzymeEntity[];
+        return res["body"] as EnzymeEntity[];
       })
       .then((res) => {
         return res

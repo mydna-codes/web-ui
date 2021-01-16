@@ -6,6 +6,7 @@ import {GeneEntity} from '../../entities/gene.entity';
 import {EnzymeService} from '../../services/enzyme.service';
 import {GenesService} from '../../services/genes.service';
 import {FormControl, FormGroup, NgForm} from '@angular/forms';
+import {of} from 'rxjs';
 
 
 @Component({
@@ -27,6 +28,9 @@ export class StorageComponent implements OnInit {
 
   public contentLoaded
   public formReady: boolean
+
+  public currentPage = 1
+  public entitiesPerPage = 2
 
   async ngOnInit() {
 
@@ -52,13 +56,15 @@ export class StorageComponent implements OnInit {
   public setEntityList(entityType: string){
 
     this.selectedEntityType = entityType
+    let offsetStart = (this.currentPage - 1) * this.entitiesPerPage
+    let offsetEnd = offsetStart + this.entitiesPerPage
 
     if(this.selectedEntityType == "dna")
-      return this.entityList = this.dnas
+      return this.entityList = this.dnas.slice(offsetStart, offsetEnd)
     if(this.selectedEntityType == "gene")
-      return this.entityList = this.genes
+      return this.entityList = this.genes.slice(offsetStart, offsetEnd)
     if(this.selectedEntityType == "enzyme")
-      return this.entityList = this.enzymes
+      return this.entityList = this.enzymes.slice(offsetStart, offsetEnd)
   }
 
   async editEntity(f: NgForm) {
@@ -158,5 +164,34 @@ export class StorageComponent implements OnInit {
     this.formReady = true
 
     console.log(this.selectedEntity)
+  }
+
+  async changePage(page: number){
+
+    if(page == this.currentPage)
+      return
+
+    let offset = (page - 1) * this.entitiesPerPage
+    this.currentPage = page
+
+    if(this.selectedEntityType == "dna"){
+      const entities = await this.dnaService.getAll(offset)
+      for(let i = 0; i < entities.length; i++){
+        this.dnas[offset + i] = entities[i]
+      }
+    } else if(this.selectedEntityType == "gene"){
+      const entities = await this.geneService.getAll(offset)
+      for(let i = 0; i < entities.length; i++){
+        this.genes[offset + i] = entities[i]
+      }
+    } else if(this.selectedEntityType == "enzyme"){
+      const entities = await this.enzymeService.getAll(offset)
+      for(let i = 0; i < entities.length; i++){
+        this.enzymes[offset + i] = entities[i]
+      }
+    }
+
+    this.setEntityList(this.selectedEntityType)
+
   }
 }

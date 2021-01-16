@@ -20,10 +20,6 @@ export class DashboardComponent implements OnInit {
     this.setContentLoaded(true)
   }
 
-  public login(){
-    this.keyCloakService.login()
-  }
-
   setContentLoaded(loaded: boolean){
     this.contentLoaded = loaded
   }

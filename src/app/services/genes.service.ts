@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {GeneEntity} from '../entities/gene.entity';
 
@@ -13,12 +13,13 @@ export class GenesService {
 
   }
 
-  public getAll(): Promise<GeneEntity[]>{
+  public getAll(offset: number = 0): Promise<GeneEntity[]>{
     let url = environment.backendUrl + environment.crudEndpoints.gene
-    return this.httpClient.get(url)
+    let params = new HttpParams().set("limit", "2").set("offset", offset.toString())
+    return this.httpClient.get(url, {observe: 'response', params: params})
       .toPromise()
       .then((res) => {
-        return res as GeneEntity[];
+        return res["body"] as GeneEntity[];
       })
       .then((res) => {
         return res

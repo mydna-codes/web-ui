@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {DnaEntity} from '../entities/dna.entity';
 
@@ -13,14 +13,17 @@ export class DnaService {
 
   }
 
-  public getAll(): Promise<DnaEntity[]>{
+  public getAll(offset: number = 0): Promise<DnaEntity[]>{
     let url = environment.backendUrl + environment.crudEndpoints.dna
-    return this.httpClient.get(url)
+    let params = new HttpParams().set("limit", "2").set("offset", offset.toString())
+    return this.httpClient.get(url, {observe: 'response', params: params})
       .toPromise()
       .then((res) => {
-        return res as DnaEntity[];
+        console.log(res["headers"])
+        return res.body as DnaEntity[];
       })
       .then((res) => {
+        console.log(res)
         return res
       }).catch((err) => {
         console.log("error fetching all genes", err)
