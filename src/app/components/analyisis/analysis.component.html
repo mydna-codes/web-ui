@@ -51,7 +51,7 @@
 
                       <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
                       <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
-                      <li class="page-item" (click)="changePage(2)"><a class="page-link bg-mat-accent">{{currentPage}}</a></li>
+                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark" style="color: white !important;">{{currentPage}}</a></li>
                       <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
                       <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
 
@@ -125,7 +125,7 @@
 
                       <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
                       <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
-                      <li class="page-item" (click)="changePage(2)"><a class="page-link bg-mat-accent">{{currentPage}}</a></li>
+                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark" style="color: white !important;">{{currentPage}}</a></li>
                       <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
                       <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
 
@@ -200,7 +200,7 @@
 
                       <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
                       <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
-                      <li class="page-item" (click)="changePage(2)"><a class="page-link bg-mat-accent">{{currentPage}}</a></li>
+                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark" style="color: white !important;">{{currentPage}}</a></li>
                       <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
                       <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
 
