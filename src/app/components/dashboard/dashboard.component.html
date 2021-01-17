@@ -79,7 +79,7 @@
       <div class="col-md-4 col-12">
         <div class="card text-center h-100">
           <div class="card-body h-100">
-            <h1  class="card-text bg-mat-accent">ANALYSIS HISTORY</h1>
+            <h1  class="card-text bg-mat-accent">RECENT ANALYSES</h1>
             <table class="table w-100">
               <thead class="thead-light ">
               <tr>
@@ -88,9 +88,9 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let summary of analysisSummaries; let last = last; let i = index" class="d-lg-block" [class.d-md-none]="i > 2"  [class.border-bottom]="last" >
+              <tr *ngFor="let summary of analysisSummaries; let last = last; let i = index" class="d-lg-table-row"  [class.d-md-none]="i > 4" [class.border-bottom]="last" >
                 <td scope="row" style="width: 25%" class="pt-4">{{summary.created.substring(0, 10) | date}}</td>
-                <td class="pt-4" style="font-size: 1rem; width: 50%">{{summary.analysisName}}</td>
+                <td class="pt-4" style="font-size: 1rem;">{{summary.analysisName}}</td>
               </tr>
               </tbody>
             </table>
