@@ -19,7 +19,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-accent': ''"
+              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
                   (click)="toggleEntity(entity, i)"
                   *ngFor="let entity of entityList; let i = index">
                 <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
@@ -37,6 +37,11 @@
                 <th>
                   <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center m-0">
+                      <li class="page-item">
+                        <a class="page-link" style="color: black; border: 0" (click)="changePage(1)">
+                          select page
+                        </a>
+                      </li>
                       <li class="page-item">
                         <a class="page-link" (click)="changePage(1)" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
@@ -88,7 +93,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-accent': ''"
+              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
                   (click)="toggleEntity(entity, i)"
                   *ngFor="let entity of entityList; let i = index">
                 <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
@@ -106,6 +111,11 @@
                 <th>
                   <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center m-0">
+                      <li class="page-item">
+                        <a class="page-link" style="color: black; border: 0" (click)="changePage(1)">
+                          select page
+                        </a>
+                      </li>
                       <li class="page-item">
                         <a class="page-link" (click)="changePage(1)" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
@@ -158,7 +168,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-accent': ''"
+              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
                   (click)="toggleEntity(entity, i)"
                   *ngFor="let entity of entityList; let i = index">
                 <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
@@ -176,6 +186,11 @@
                 <th>
                   <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center m-0">
+                      <li class="page-item">
+                        <a class="page-link" style="color: black; border: 0" (click)="changePage(1)">
+                          select page
+                        </a>
+                      </li>
                       <li class="page-item">
                         <a class="page-link" (click)="changePage(1)" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
@@ -204,44 +219,6 @@
             </table>
           </div>
           <div>
-            <button class="mt-3 bg-dark" [ngStyle]="{'color': selectedDna ? 'white': 'grey'}"
-                    mat-button [disabled]="!selectedDna" matStepperNext>Next
-            </button>
-          </div>
-        </form>
-      </mat-step>
-
-      <!-- OVERVIEW -->
-      <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-        <ng-template matStepLabel>Overview</ng-template>
-        <form [formGroup]="firstFormGroup">
-          <div class="card">
-            <table *ngIf="contentLoaded" class="table w-100">
-              <thead class="thead-dark">
-              <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngIf="step == 3">
-                <th style="width: 20%" scope="row" class="pt-4">Selected DNA</th>
-                <td class="pt-4 " style="font-size: 1.2rem; width: 50%"> {{selectedDna.name}}</td>
-              </tr>
-              <tr>
-                <th style="width: 20%" scope="row" class="pt-4">Selected Enzymes</th>
-                <td  class="pt-4 "
-                    style="font-size: 1.2rem; width: 50%"><span *ngFor="let enzyme of selectedEnzymes; let last = last">{{enzyme.name}}{{last ? '' : ', '}}</span> </td>
-              </tr>
-              <tr>
-                <th style="width: 20%" scope="row" class="pt-4">Selected Genes</th>
-                <td class="pt-4 " style="font-size: 1.2rem; width: 50%"><span
-                  *ngFor="let gene of selectedGenes; let last = last">{{gene.name}}{{last ? '' : ', '}}</span></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div>
             <button (click)="analyze()" class="mt-3 bg-primary text-white"
                     mat-button>Analyze
             </button>
@@ -249,10 +226,39 @@
         </form>
       </mat-step>
 
+
     </mat-horizontal-stepper>
 
 
   </div>
+
+  <div class="card mt-4">
+    <table *ngIf="contentLoaded" class="table w-100">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Overview</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr >
+        <th style="width: 20%" scope="row" class="pt-4">Selected DNA</th>
+        <td class="pt-4 " style="font-size: 1.2rem; width: 50%"> {{selectedDna ? selectedDna.name : ''}}</td>
+      </tr>
+      <tr>
+        <th style="width: 20%" scope="row" class="pt-4">Selected Enzymes</th>
+        <td  class="pt-4 "
+             style="font-size: 1.2rem; width: 50%"><span *ngFor="let enzyme of selectedEnzymes; let last = last">{{enzyme.name}}{{last ? '' : ', '}}</span> </td>
+      </tr>
+      <tr>
+        <th style="width: 20%" scope="row" class="pt-4">Selected Genes</th>
+        <td class="pt-4 " style="font-size: 1.2rem; width: 50%"><span
+          *ngFor="let gene of selectedGenes; let last = last">{{gene.name}}{{last ? '' : ', '}}</span></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
 
 <div [hidden]="!showIframe" class="full-size justify-content-center d-flex bg-light">

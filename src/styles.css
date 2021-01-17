@@ -22,6 +22,10 @@ body {
   color: black;
 }
 
+.bg-mat-selected {
+  background-color: rgb(118, 231, 112); ;
+}
+
 .bg-mat-secondary {
   background-color: #757575;
 }
