@@ -262,7 +262,10 @@ export class AnalysisComponent implements OnInit {
         }
 
         /* prepare data for drawing */
-        let overlaps = this.combineOverlaps(genes);
+        let overlaps = this.combineGeneOverlaps(genes);
+        let cuts = this.combineEnzymeCuts(enzymes)
+
+        overlaps = overlaps.concat(cuts)
 
         /* send data to iframe */
         this.sendDataToIframeSource({type: 'create', dna: dna, enzymes: enzymes, overlaps: overlaps});
@@ -279,46 +282,8 @@ export class AnalysisComponent implements OnInit {
 
   }
 
-  public async onSubmit() {
-    this.submitted = true;
-    if (!this.plasmidForm.valid) {
-      return;
-    }
 
-    const request = {
-      dnaId: this.plasmidForm.controls['selectedDnaId'].value,
-      enzymeIds: this.plasmidForm.controls['selectedEnzymesId'].value,
-      geneIds: this.plasmidForm.controls['selectedGenesId'].value
-    };
-
-    try {
-      const response = await this.analysisService.analyze(request) as AnalysisResponseEntity;
-      if (response && response.data && response.data.analyzeDna) {
-
-        /* parse data */
-        let data = response.data.analyzeDna;
-        let genes = data.genes;
-        let enzymes = data.enzymes;
-
-        /* prepare data for drawing */
-        let overlaps = this.combineOverlaps(genes);
-
-        /* send data to iframe */
-        this.sendDataToIframeSource({type: 'create', dna: data.dna, enzymes: enzymes, overlaps: overlaps});
-        this.showIframe = true;
-
-      } else {
-        this.showIframe = false;
-      }
-    } catch (e) {
-      this.showIframe = false;
-      console.log('error while fetching data from graphql', e);
-    }
-
-
-  }
-
-  private combineOverlaps(genes: { overlaps: { fromIndex: number, toIndex: number, orientation: string }[], gene: GeneEntity }[]) {
+  private combineGeneOverlaps(genes: { overlaps: { fromIndex: number, toIndex: number, orientation: string }[], gene: GeneEntity }[]) {
     let overlaps = [];
     for (const gene of genes) {
       for (const overlap of gene.overlaps) {
@@ -328,6 +293,34 @@ export class AnalysisComponent implements OnInit {
 
         overlap['name'] = gene.gene.name;
         overlap['positive'] = overlap.orientation == CutOrientation.POSITIVE;
+        overlaps.push(overlap);
+
+      }
+    }
+
+    return overlaps;
+  }
+
+  private combineEnzymeCuts(enzymes: { cuts: { lowerCut: number, upperCut: number}[], enzyme: EnzymeEntity }[]) {
+    let overlaps = [];
+    for (const enzyme of enzymes) {
+      console.log(enzyme)
+      for (const overlap of enzyme.cuts) {
+
+        console.log(overlap)
+
+        let {r, g, b} = this.getRandomRGB();
+        overlap['fill'] = 'fill:rgba(' + r + ',' + g + ',' + b + ',' + '0.8' + ')';
+
+        overlap["fromIndex"] = Math.min(overlap.lowerCut, overlap.upperCut)
+        overlap["toIndex"] = Math.max(overlap.lowerCut, overlap.upperCut)
+
+        let orientation = CutOrientation.POSITIVE
+        if(overlap.lowerCut > overlap.upperCut)
+          orientation = CutOrientation.NEGATIVE
+
+        overlap['name'] = enzyme.enzyme.name;
+        overlap['positive'] = orientation
         overlaps.push(overlap);
 
       }

@@ -47,11 +47,10 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent, canActivate: [KeycloakAuthGuard]},
   {path: 'dashboard', component: DashboardComponent,  canActivate: [KeycloakAuthGuard]},
   {path: 'analysis', component: AnalysisComponent,  canActivate: [KeycloakAuthGuard]},
   {path: 'storage', component: StorageComponent,  canActivate: [KeycloakAuthGuard]},
-  {path: '', redirectTo: '/home', pathMatch: 'full'}
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
 ]
 
 @NgModule({
