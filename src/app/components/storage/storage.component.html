@@ -213,13 +213,15 @@
   <nav class="navbar navbar-light bg-primary justify-content-between">
 
     <div>
-      <button [ngClass]="selectedEntityType == 'dna' ? 'bg-mat-primary' : 'bg-white'" (click)="setEntityList('dna')"
+      <button [ngClass]="selectedEntityType == 'dna' ? 'bg-mat-primary' : 'bg-white'"
+              (click)="currentPage = 1; setEntityList('dna')"
               class="btn  mr-md-2 mr-1 " type="submit">DNA
       </button>
       <button [ngClass]="selectedEntityType == 'enzyme' ? 'bg-mat-primary' : 'bg-white'"
-              (click)="setEntityList('enzyme')" class="btn  mr-md-2 mr-1 " type="submit">ENZYMES
+              (click)="currentPage = 1; setEntityList('enzyme'); " class="btn  mr-md-2 mr-1 " type="submit">ENZYMES
       </button>
-      <button [ngClass]="selectedEntityType == 'gene' ? 'bg-mat-primary' : 'bg-white'" (click)="setEntityList('gene')"
+      <button [ngClass]="selectedEntityType == 'gene' ? 'bg-mat-primary' : 'bg-white'"
+              (click)="currentPage = 1; setEntityList('gene')"
               class="btn  " type="submit">GENES
       </button>
     </div>
@@ -257,13 +259,16 @@
       <td class="pt-4" style="font-size: 1.2rem; width: 50%">{{entity.name}}</td>
       <td style="width: 25%">
         <div style="float: right" class="pt-2">
-          <mat-icon (click)="openEdit(entity); selectedEntityIndex = (currentPage - 1) * entitiesPerPage + i" data-toggle="modal" data-target="#infoModal"
+          <mat-icon (click)="openEdit(entity); selectedEntityIndex = (currentPage - 1) * entitiesPerPage + i"
+                    data-toggle="modal" data-target="#infoModal"
                     style="vertical-align: center" class="image-size text-primary">info
           </mat-icon>
-          <mat-icon (click)="openEdit(entity); selectedEntityIndex = (currentPage - 1) * entitiesPerPage + i" data-toggle="modal" data-target="#editModal"
+          <mat-icon (click)="openEdit(entity); selectedEntityIndex = (currentPage - 1) * entitiesPerPage + i"
+                    data-toggle="modal" data-target="#editModal"
                     style="vertical-align: center" color="accent" class="image-size">edit
           </mat-icon>
-          <mat-icon (click)="selectedEntity = entity; selectedEntityIndex = (currentPage - 1) * entitiesPerPage + i" data-toggle="modal"
+          <mat-icon (click)="selectedEntity = entity; selectedEntityIndex = (currentPage - 1) * entitiesPerPage + i"
+                    data-toggle="modal"
                     data-target="#deleteModal"
                     style="vertical-align: center" color="warn" class="image-size">delete
           </mat-icon>
@@ -274,27 +279,31 @@
     <tfoot>
     <tr>
       <td>&nbsp;</td>
-      <th><nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center m-0">
-          <li class="page-item">
-            <a class="page-link" (click)="changePage(1)" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item" (click)="changePage(1)" ><a class="page-link" >1</a></li>
-          <li class="page-item" (click)="changePage(2)" ><a class="page-link" >2</a></li>
-          <li class="page-item" (click)="changePage(3)" ><a class="page-link" >3</a></li>
-          <li class="page-item" (click)="changePage(4)" ><a class="page-link" >4</a></li>
+      <th>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center m-0">
+            <li class="page-item">
+              <a class="page-link" (click)="changePage(1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
 
-          <li class="page-item">
-            <a class="page-link" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav></th>
+            <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
+            <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
+            <li class="page-item" (click)="changePage(2)"><a class="page-link bg-mat-accent">{{currentPage}}</a></li>
+            <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
+            <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
+
+            <li class="page-item">
+              <a class="page-link" (click)="changePage(pageTotal)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </th>
       <td></td>
     </tr>
     </tfoot>

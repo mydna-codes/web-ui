@@ -9,6 +9,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnalysisService} from '../../services/analysis.service';
 import {AnalysisResponseEntity} from '../../entities/analysisResponse.entity';
 import {CutOrientation} from '../../entities/cutOrientation';
+import {EnzymeEntity} from '../../entities/enzyme.entity';
 
 
 @Component({
@@ -31,17 +32,25 @@ export class AnalysisComponent implements OnInit {
 
   isEditable = true;
 
-
   /* DATA HOLDERS */
-  public allGenes: GeneEntity[];
-  public allDna: DnaEntity[];
-  public allEnzymes: any[];
-  public entityList: any[];
+  private allGenes: GeneEntity[];
+  private totalDnas: number
+
+  private allDna: DnaEntity[];
+  private totalEnzymes: number
+
+  private allEnzymes: EnzymeEntity[];
+  private totalGenes: number
+
+  public entityList: DnaEntity[]|GeneEntity[]|EnzymeEntity[];
+
   public contentLoaded = false;
 
   public selectedDna: any;
   public selectedEnzymes: any[] = [];
   public selectedGenes: any[] = [];
+
+  /* PERSISTENCE FOR HIGHLIGHTED ENTITIES */
   public highlightedIndexes: { 1: number[], 2: number[], 3: number[] } = {
     1: [],
     2: [],
@@ -63,14 +72,19 @@ export class AnalysisComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.allDna = await this.dnaService.getAll();
-    this.entityList = this.allDna;
+    let dnaResponse = await this.dnaService.getAll()
+    this.allDna = dnaResponse.entities
+    this.totalDnas = dnaResponse.total
+    this.entityList = this.allDna
     this.contentLoaded = true;
 
-    this.allGenes = await this.genesService.getAll();
-    this.allEnzymes = await this.enzymeService.getAll();
+    let enzymeResponse = await this.enzymeService.getAll()
+    this.allEnzymes = enzymeResponse.entities
+    this.totalEnzymes = enzymeResponse.total
 
-    console.log(this.allDna)
+    let genesResponse = await this.genesService.getAll()
+    this.allGenes = genesResponse.entities
+    this.totalGenes = genesResponse.total
 
   }
 
