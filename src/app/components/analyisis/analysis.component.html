@@ -296,13 +296,12 @@
 
 </div>
 
-<div [hidden]="!showIframe" class="full-size justify-content-center d-flex bg-light">
+<div *ngIf="showIframe" class="full-size justify-content-center d-flex bg-light">
 
   <app-plasmid-js-iframe style="width: 550px; height: 550px; align-self: center;" [hidden]="!iframeReady"
                          #iframeComponent></app-plasmid-js-iframe>
 
-  <mat-spinner *ngIf="!iframeReady" class="align-self-center"></mat-spinner>
-
+  <mat-spinner *ngIf="!iframeReady && showIframe" class="align-self-center"></mat-spinner>
 
 </div>
 
