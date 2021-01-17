@@ -14,3 +14,4 @@
   border-botom-right-radius: 0.25rem;
 }
 
+.pagination a:hover:not(.active) {background-color: #ddd;}

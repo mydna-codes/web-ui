@@ -9,6 +9,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AnalysisService} from '../../services/analysis.service';
 import {AnalysisResponseEntity} from '../../entities/analysisResponse.entity';
 import {CutOrientation} from '../../entities/cutOrientation';
+import {EnzymeEntity} from '../../entities/enzyme.entity';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AnalysisComponent implements OnInit {
 
   @ViewChild('iframeComponent') iframeComponent: PlasmidJsIframeComponent;
 
-  constructor(private _formBuilder: FormBuilder, private genesService: GenesService, private dnaService: DnaService, private enzymeService: EnzymeService, private analysisService: AnalysisService) {
+  constructor(private _formBuilder: FormBuilder, private geneService: GenesService, private dnaService: DnaService, private enzymeService: EnzymeService, private analysisService: AnalysisService) {
   }
   firstFormGroup: FormGroup = new FormGroup({
     firstName: new FormControl()
@@ -31,17 +32,33 @@ export class AnalysisComponent implements OnInit {
 
   isEditable = true;
 
-
   /* DATA HOLDERS */
-  public allGenes: GeneEntity[];
-  public allDna: DnaEntity[];
-  public allEnzymes: any[];
-  public entityList: any[];
+  private dnas: DnaEntity[];
+  private totalDnas: number
+
+  private enzymes: EnzymeEntity[];
+  private totalEnzymes: number
+
+  private genes: GeneEntity[];
+  private totalGenes: number
+
+  public selectedEntityType
+  public selectedEntity: DnaEntity|EnzymeEntity|GeneEntity
+  public selectedEntityIndex: number
+  public selectedEntityTotal: number
+  public entityList: DnaEntity[]|GeneEntity[]|EnzymeEntity[];
+
   public contentLoaded = false;
 
   public selectedDna: any;
   public selectedEnzymes: any[] = [];
   public selectedGenes: any[] = [];
+
+  public currentPage = 1
+  public entitiesPerPage = 3
+  public pageTotal = 1
+
+  /* PERSISTENCE FOR HIGHLIGHTED ENTITIES */
   public highlightedIndexes: { 1: number[], 2: number[], 3: number[] } = {
     1: [],
     2: [],
@@ -63,38 +80,102 @@ export class AnalysisComponent implements OnInit {
 
   async ngOnInit() {
 
-    this.allDna = await this.dnaService.getAll();
-    this.entityList = this.allDna;
+    let dnaResponse = await this.dnaService.getAll()
+    this.dnas = dnaResponse.entities
+    this.totalDnas = dnaResponse.total
+
+    this.setEntityList("dna")
     this.contentLoaded = true;
 
-    this.allGenes = await this.genesService.getAll();
-    this.allEnzymes = await this.enzymeService.getAll();
+    let enzymeResponse = await this.enzymeService.getAll()
+    this.enzymes = enzymeResponse.entities
+    this.totalEnzymes = enzymeResponse.total
 
-    console.log(this.allDna)
+    let genesResponse = await this.geneService.getAll()
+    this.genes = genesResponse.entities
+    this.totalGenes = genesResponse.total
 
   }
+
+  /* PAGINATION */
+  async changePage(page: number){
+
+    if(page == this.currentPage)
+      return
+
+    let offset = (page - 1) * this.entitiesPerPage
+    this.currentPage = page
+
+    if(this.selectedEntityType == "dna"){
+      const response = await this.dnaService.getAll(offset, this.entitiesPerPage)
+      const entities = response.entities
+      this.totalDnas = response.total
+      for(let i = 0; i < entities.length; i++){
+        this.dnas[offset + i] = entities[i]
+      }
+    } else if(this.selectedEntityType == "gene"){
+      const response = await this.geneService.getAll(offset, this.entitiesPerPage)
+      const entities = response.entities
+      this.totalDnas = response.total
+      for(let i = 0; i < entities.length; i++){
+        this.genes[offset + i] = entities[i]
+      }
+    } else if(this.selectedEntityType == "enzyme"){
+      const response = await this.enzymeService.getAll(offset, this.entitiesPerPage)
+      const entities = response.entities
+      this.totalDnas = response.total
+      for(let i = 0; i < entities.length; i++){
+        this.enzymes[offset + i] = entities[i]
+      }
+    }
+
+    this.setEntityList(this.selectedEntityType)
+
+  }
+
+  public setEntityList(entityType: string){
+
+    this.selectedEntityType = entityType
+    let offsetStart = (this.currentPage - 1) * this.entitiesPerPage
+    let offsetEnd = offsetStart + this.entitiesPerPage
+
+    if(this.selectedEntityType == "dna") {
+      this.selectedEntityTotal = this.totalDnas
+      this.entityList = this.dnas.slice(offsetStart, offsetEnd)
+    }else if(this.selectedEntityType == "gene"){
+      this.selectedEntityTotal = this.totalGenes
+      this.entityList = this.genes.slice(offsetStart, offsetEnd)
+    }else if(this.selectedEntityType == "enzyme"){
+      this.selectedEntityTotal = this.totalEnzymes
+      this.entityList = this.enzymes.slice(offsetStart, offsetEnd)
+    }
+
+    this.pageTotal = Math.ceil(this.selectedEntityTotal / this.entitiesPerPage)
+
+  }
+
 
   public nextStep() {
     this.step++;
     if (this.step == 2) {
-      this.entityList = this.allEnzymes;
+      this.setEntityList("enzyme")
     } else if (this.step == 3) {
-      this.entityList = this.allGenes;
+      this.setEntityList("gene")
     }
   }
 
   public previousStep() {
     this.step--;
     if (this.step == 1) {
-      this.entityList = this.allDna;
+      this.setEntityList("dna")
     } else if (this.step == 2) {
-      this.entityList = this.allEnzymes;
+      this.setEntityList("enzyme")
     }
   }
 
   public stepChange(event: any){
 
-
+    this.currentPage = 1
     let selectedStep = event.selectedIndex + 1
 
     /* IF ON FINAL STEP */
@@ -110,9 +191,9 @@ export class AnalysisComponent implements OnInit {
     }
   }
 
-
-
   public toggleEntity(entity: any, index: number) {
+
+    index = (this.currentPage - 1) * this.entitiesPerPage + index
 
     let indexInSelectedArray = this.highlightedIndexes[this.step].indexOf(index);
     if (indexInSelectedArray > -1) {
@@ -137,6 +218,8 @@ export class AnalysisComponent implements OnInit {
       } else if (this.step == 3) {
         this.selectedGenes.push(entity);
       }
+
+      console.log(this.highlightedIndexes)
 
     }
 

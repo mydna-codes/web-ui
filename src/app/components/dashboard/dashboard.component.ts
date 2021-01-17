@@ -16,12 +16,7 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
 
     this.setContentLoaded(false)
-    this.mainEntities = await this.dnaService.getAll()
     this.setContentLoaded(true)
-  }
-
-  public login(){
-    this.keyCloakService.login()
   }
 
   setContentLoaded(loaded: boolean){
