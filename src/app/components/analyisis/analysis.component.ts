@@ -32,6 +32,8 @@ export class AnalysisComponent implements OnInit {
 
   isEditable = true;
 
+  private iframeReady = false
+
   /* DATA HOLDERS */
   private dnas: DnaEntity[];
   private totalDnas: number
@@ -237,6 +239,10 @@ export class AnalysisComponent implements OnInit {
   }
 
   public async analyze() {
+
+    this.showIframe = true;
+
+
     const request = {
       dnaId: this.selectedDna.id,
       enzymeIds: this.selectedEnzymes.map(enzyme => enzyme.id),
@@ -269,8 +275,7 @@ export class AnalysisComponent implements OnInit {
 
         /* send data to iframe */
         this.sendDataToIframeSource({type: 'create', dna: dna, enzymes: enzymes, overlaps: overlaps});
-        this.showIframe = true;
-
+        this.iframeReady = true
       } else {
         this.showIframe = false;
       }

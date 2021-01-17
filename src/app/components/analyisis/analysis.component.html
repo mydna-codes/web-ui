@@ -26,9 +26,10 @@
               </tr>
               </thead>
               <tbody>
-              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
-                  (click)="toggleEntity(entity, i)"
-                  *ngFor="let entity of entityList; let i = index">
+              <tr
+                [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
+                (click)="toggleEntity(entity, i)"
+                *ngFor="let entity of entityList; let i = index">
                 <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
                 <td class="pt-4 " style="font-size: 1.2rem; width: 50%">{{entity.name}}</td>
                 <td style="width: 25%">
@@ -56,11 +57,17 @@
                         </a>
                       </li>
 
-                      <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
-                      <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
-                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark" style="color: white !important;">{{currentPage}}</a></li>
-                      <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
-                      <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
+                      <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item"
+                          (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
+                      <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a
+                        class="page-link">{{currentPage - 1}}</a></li>
+                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark"
+                                                                                 style="color: white !important;">{{currentPage}}</a>
+                      </li>
+                      <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item"
+                          (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
+                      <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item"
+                          (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
 
                       <li class="page-item">
                         <a class="page-link" (click)="changePage(pageTotal)" aria-label="Next">
@@ -100,9 +107,10 @@
               </tr>
               </thead>
               <tbody>
-              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
-                  (click)="toggleEntity(entity, i)"
-                  *ngFor="let entity of entityList; let i = index">
+              <tr
+                [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
+                (click)="toggleEntity(entity, i)"
+                *ngFor="let entity of entityList; let i = index">
                 <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
                 <td class="pt-4 " style="font-size: 1.2rem; width: 50%">{{entity.name}}</td>
                 <td style="width: 25%">
@@ -130,11 +138,17 @@
                         </a>
                       </li>
 
-                      <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
-                      <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
-                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark" style="color: white !important;">{{currentPage}}</a></li>
-                      <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
-                      <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
+                      <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item"
+                          (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
+                      <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a
+                        class="page-link">{{currentPage - 1}}</a></li>
+                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark"
+                                                                                 style="color: white !important;">{{currentPage}}</a>
+                      </li>
+                      <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item"
+                          (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
+                      <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item"
+                          (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
 
                       <li class="page-item">
                         <a class="page-link" (click)="changePage(pageTotal)" aria-label="Next">
@@ -175,9 +189,10 @@
               </tr>
               </thead>
               <tbody>
-              <tr [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
-                  (click)="toggleEntity(entity, i)"
-                  *ngFor="let entity of entityList; let i = index">
+              <tr
+                [ngClass]="highlightedIndexes[this.step].includes((currentPage - 1)* entitiesPerPage + i) ? 'bg-mat-selected': ''"
+                (click)="toggleEntity(entity, i)"
+                *ngFor="let entity of entityList; let i = index">
                 <th scope="row" style="width: 25%" class="pt-4">{{i + 1}}</th>
                 <td class="pt-4 " style="font-size: 1.2rem; width: 50%">{{entity.name}}</td>
                 <td style="width: 25%">
@@ -205,11 +220,17 @@
                         </a>
                       </li>
 
-                      <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item" (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
-                      <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a class="page-link">{{currentPage - 1}}</a></li>
-                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark" style="color: white !important;">{{currentPage}}</a></li>
-                      <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
-                      <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item" (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
+                      <li *ngIf="currentPage == pageTotal && currentPage - 2 >= 1" class="page-item"
+                          (click)="changePage(currentPage - 2)"><a class="page-link">{{currentPage - 2}}</a></li>
+                      <li *ngIf="currentPage - 1 >= 1" class="page-item" (click)="changePage(currentPage - 1)"><a
+                        class="page-link">{{currentPage - 1}}</a></li>
+                      <li class="page-item" (click)="changePage(currentPage)"><a class="page-link bg-dark"
+                                                                                 style="color: white !important;">{{currentPage}}</a>
+                      </li>
+                      <li *ngIf="currentPage + 1 <=   pageTotal" class="page-item"
+                          (click)="changePage(currentPage + 1)"><a class="page-link">{{currentPage + 1}}</a></li>
+                      <li *ngIf="currentPage == 1 && currentPage + 2 <=   pageTotal" class="page-item"
+                          (click)="changePage(currentPage + 2)"><a class="page-link">{{currentPage + 2}}</a></li>
 
                       <li class="page-item">
                         <a class="page-link" (click)="changePage(pageTotal)" aria-label="Next">
@@ -227,7 +248,8 @@
           </div>
           <div class="d-flex mt-3">
 
-            <button [disabled]="!selectedDna" [class.bg-danger]="!selectedDna" (click)="analyze()" class=" bg-primary text-white d-inline"
+            <button [disabled]="!selectedDna" [class.bg-danger]="!selectedDna" (click)="analyze()"
+                    class=" bg-primary text-white d-inline"
                     mat-button>Analyze
             </button>
             <div class="alert alert-danger d-inline mb-0" *ngIf="!selectedDna" role="alert">
@@ -253,14 +275,15 @@
       </tr>
       </thead>
       <tbody>
-      <tr >
+      <tr>
         <th style="width: 20%" scope="row" class="pt-4">Selected DNA</th>
         <td class="pt-4 " style="font-size: 1.2rem; width: 50%"> {{selectedDna ? selectedDna.name : ''}}</td>
       </tr>
       <tr>
         <th style="width: 20%" scope="row" class="pt-4">Selected Enzymes</th>
-        <td  class="pt-4 "
-             style="font-size: 1.2rem; width: 50%"><span *ngFor="let enzyme of selectedEnzymes; let last = last">{{enzyme.name}}{{last ? '' : ', '}}</span> </td>
+        <td class="pt-4 "
+            style="font-size: 1.2rem; width: 50%"><span
+          *ngFor="let enzyme of selectedEnzymes; let last = last">{{enzyme.name}}{{last ? '' : ', '}}</span></td>
       </tr>
       <tr>
         <th style="width: 20%" scope="row" class="pt-4">Selected Genes</th>
@@ -275,8 +298,10 @@
 
 <div [hidden]="!showIframe" class="full-size justify-content-center d-flex bg-light">
 
-  <app-plasmid-js-iframe style="width: 550px; height: 550px; align-self: center;" [hidden]="!showIframe"
+  <app-plasmid-js-iframe style="width: 550px; height: 550px; align-self: center;" [hidden]="!iframeReady"
                          #iframeComponent></app-plasmid-js-iframe>
+
+  <mat-spinner *ngIf="!iframeReady" class="align-self-center"></mat-spinner>
 
 
 </div>
