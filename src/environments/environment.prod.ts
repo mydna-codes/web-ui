@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   plasmidJsSrc: 'https://plasmid-js.mydna.codes/',
   backendUrl: 'https://sequence-bank-test.mydna.codes/v1/',
-  resultsUrl: "https://test-result.mydna.codes/v1/",
+  resultsUrl: "https://result-test.mydna.codes/v1/",
   crudEndpoints: {
     dna: 'dna',
     enzyme: 'enzyme',
