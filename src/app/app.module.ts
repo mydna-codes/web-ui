@@ -36,12 +36,22 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {StorageComponent} from './components/storage/storage.component';
 import {initKeycloak} from "./factories/fatories";
+import { HomeComponent } from './components/home/home.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
+
+import {MatNativeDateModule} from '@angular/material/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {DemoMaterialModule} from './material-module';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+
 
 const routes: Routes = [
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'analysis', component: AnalysisComponent, canActivate: [KeycloakAuthGuard]},
-  {path: 'storage', component: StorageComponent, canActivate: [KeycloakAuthGuard]},
-  {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+  {path: 'home', component: HomeComponent, canActivate: [KeycloakAuthGuard]},
+  {path: 'dashboard', component: DashboardComponent,  canActivate: [KeycloakAuthGuard]},
+  {path: 'analysis', component: AnalysisComponent,  canActivate: [KeycloakAuthGuard]},
+  {path: 'storage', component: StorageComponent,  canActivate: [KeycloakAuthGuard]},
+  {path: '', redirectTo: '/home', pathMatch: 'full'}
 ]
 
 @NgModule({
@@ -51,6 +61,7 @@ const routes: Routes = [
     PlasmidJsIframeComponent,
     DashboardComponent,
     StorageComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +82,13 @@ const routes: Routes = [
     MatTabsModule,
     ChartsModule,
     MatExpansionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatStepperModule,
+    MatSelectModule,
+    BrowserModule,
+    DemoMaterialModule,
+    MatNativeDateModule,
+
   ],
   providers: [
     {

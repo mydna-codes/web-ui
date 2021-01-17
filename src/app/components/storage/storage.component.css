@@ -1,0 +1,17 @@
+.image-size {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.height-transition {
+  transition: max-height 5s ease-in;
+}
+
+.search-border {
+  border: 1px solid rgb(206, 212, 218);
+  border-left: 0;
+  border-top-right-radius: 0.25rem;
+  border-botom-right-radius: 0.25rem;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

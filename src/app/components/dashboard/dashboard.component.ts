@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ChartDataSets} from 'chart.js';
 import {Color, Label} from 'ng2-charts';
 import {DnaService} from '../../services/dna.service';
-import {timeout} from 'rxjs/operators';
 import {KeycloakService} from "@procempa/ngx-keycloak";
 
 @Component({
@@ -18,59 +16,14 @@ export class DashboardComponent implements OnInit {
   async ngOnInit() {
 
     this.setContentLoaded(false)
-
-    this.mainEntities = await this.dnaService.getAll()
-    console.log(this.mainEntities)
-    setTimeout(() => {
-      this.setContentLoaded(true)
-    }, 2000)
-  }
-
-  public login(){
-    this.keyCloakService.login()
+    this.setContentLoaded(true)
   }
 
   setContentLoaded(loaded: boolean){
     this.contentLoaded = loaded
   }
 
-  public setMainContent(currentPosition: number) {
-    const temp = this.graphs[currentPosition];
-    this.graphs[currentPosition] = this.mainGraph;
-    this.mainGraph = temp;
-  }
-
-  contentLoaded
-
-  graphs = [
-    {
-      data: [
-        { data: [85, 72, 28, 45, 67, 50] }
-      ],
-      name: 'DNA',
-      current: 10,
-      max: 50,
-      description: "10 / 50"
-    },
-    {
-      data: [
-        { data: [85, 32, 98, 75, 107, 75] }
-      ],
-      name: 'ENZYMES',
-      current: 50,
-      max: 120,
-      description: "50 / 120"
-    },
-    {
-      data: [
-        { data: [65, 72, 73, 64, 83, 75] }
-      ],
-      name: 'GENES',
-      current: 15,
-      max: 50,
-      description: "15 / 50"
-    }
-  ];
+  public contentLoaded
 
   mainGraph = {
     data: [
@@ -79,34 +32,13 @@ export class DashboardComponent implements OnInit {
     name: 'Analysis',
     current: null,
     max: null,
-    description: 'description'
+    description: 'GRAPH DESCRIPTION'
   }
 
   mainEntities = []
 
   lineChartLabels: Label[] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun'];
 
-  lineChartOptions = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          display: false
-        }
-      }],
-      yAxes: [{
-        gridLines: {
-          display: false
-        },
-        ticks: {
-          display: false
-        }
-      }]
-    }
-  };
   lineChartOptionsMain = {
     responsive: true,
     scales: {
@@ -128,7 +60,7 @@ export class DashboardComponent implements OnInit {
 
   lineChartColors: Color[] = [
     {
-      backgroundColor: '#673ab7',
+      backgroundColor: 'rgba(103,58,183,0.67)',
     },
   ];
 
