@@ -5,6 +5,8 @@ import {KeycloakService} from "@procempa/ngx-keycloak";
 import {EnzymeService} from '../../services/enzyme.service';
 import {GenesService} from '../../services/genes.service';
 import {Router} from '@angular/router';
+import {AnalysisService} from '../../services/analysis.service';
+import {AnalysisSummaryEntity} from '../../entities/analysisSummary.entity';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +15,12 @@ import {Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  private totalDnas
-  private totalEnzymes
-  private totalGenes
+  public totalDnas
+  public totalEnzymes
+  public totalGenes
+  public analysisSummaries: AnalysisSummaryEntity[]
 
-  constructor(private dnaService: DnaService, private enzymeService: EnzymeService, private geneService: GenesService, private router: Router) {
+  constructor(private dnaService: DnaService, private enzymeService: EnzymeService, private geneService: GenesService, private analysisService: AnalysisService) {
   }
 
   async ngOnInit() {
@@ -32,6 +35,10 @@ export class DashboardComponent implements OnInit {
 
     let genesResponse = await this.geneService.getAll()
     this.totalGenes = genesResponse.total
+
+    this.analysisSummaries = await this.analysisService.getSummaries()
+    console.log(this.analysisSummaries)
+
     this.setContentLoaded(true)
   }
 

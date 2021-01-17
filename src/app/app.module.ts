@@ -64,7 +64,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"}),
+    RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'}),
     NgxKeycloakModule.forRoot(),
     HttpClientModule,
     FormsModule,

@@ -7,10 +7,12 @@ export const environment = {
   production: false,
   plasmidJsSrc: 'http://localhost:8000/',
   backendUrl: 'https://sequence-bank-test.mydna.codes/v1/',
+  resultsUrl: "https://result-test.mydna.codes/v1/",
   crudEndpoints: {
     dna: 'dna',
     enzyme: 'enzyme',
-    gene: 'gene'
+    gene: 'gene',
+    results: 'results'
   },
   graphQlEndpoint: 'https://analysis-test.mydna.codes/graphql',
   keycloak: {
