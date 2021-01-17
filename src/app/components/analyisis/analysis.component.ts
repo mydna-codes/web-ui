@@ -32,7 +32,7 @@ export class AnalysisComponent implements OnInit {
 
   isEditable = true;
 
-  private iframeReady = false
+  public iframeReady = false
 
   /* DATA HOLDERS */
   private dnas: DnaEntity[];
