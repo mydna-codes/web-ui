@@ -1,6 +1,6 @@
 environments:
   dev:
-    suffix: "test"
+    suffix: "test."
     namespace: mydnacodes
   prod:
     suffix: ""
