@@ -36,7 +36,7 @@ export class StorageComponent implements OnInit {
   public formReady: boolean
 
   public currentPage = 1
-  public entitiesPerPage = 3
+  public entitiesPerPage = 10
   public pageTotal = 1
 
   async ngOnInit() {

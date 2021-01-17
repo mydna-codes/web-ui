@@ -60,7 +60,7 @@ const routes: Routes = [
     PlasmidJsIframeComponent,
     DashboardComponent,
     StorageComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

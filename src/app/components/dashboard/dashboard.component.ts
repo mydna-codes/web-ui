@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Color, Label} from 'ng2-charts';
 import {DnaService} from '../../services/dna.service';
 import {KeycloakService} from "@procempa/ngx-keycloak";
+import {EnzymeService} from '../../services/enzyme.service';
+import {GenesService} from '../../services/genes.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +13,25 @@ import {KeycloakService} from "@procempa/ngx-keycloak";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private dnaService: DnaService, private keyCloakService: KeycloakService) {
+  private totalDnas
+  private totalEnzymes
+  private totalGenes
+
+  constructor(private dnaService: DnaService, private enzymeService: EnzymeService, private geneService: GenesService, private router: Router) {
   }
 
   async ngOnInit() {
 
     this.setContentLoaded(false)
+    /* RETRIEVE DATA */
+    let dnaResponse = await this.dnaService.getAll()
+    this.totalDnas = dnaResponse.total
+
+    let enzymeResponse = await this.enzymeService.getAll()
+    this.totalEnzymes = enzymeResponse.total
+
+    let genesResponse = await this.geneService.getAll()
+    this.totalGenes = genesResponse.total
     this.setContentLoaded(true)
   }
 
