@@ -88,7 +88,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let summary of analysisSummaries; let last = last" [class.border-bottom]="last" >
+              <tr *ngFor="let summary of analysisSummaries; let last = last; let i = index" [class.border-bottom]="last" >
                 <td scope="row" style="width: 25%" class="pt-4">{{summary.created.substring(0, 10) | date}}</td>
                 <td class="pt-4" style="font-size: 1rem; width: 50%">{{summary.analysisName}}</td>
               </tr>

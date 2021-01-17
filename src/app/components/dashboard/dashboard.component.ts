@@ -37,6 +37,8 @@ export class DashboardComponent implements OnInit {
     this.totalGenes = genesResponse.total
 
     this.analysisSummaries = await this.analysisService.getSummaries()
+    if(this.analysisSummaries.length >= 10)
+      this.analysisSummaries = this.analysisSummaries.slice(0, 9)
     console.log(this.analysisSummaries)
 
     this.setContentLoaded(true)
