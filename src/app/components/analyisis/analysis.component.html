@@ -218,10 +218,14 @@
               </tfoot>
             </table>
           </div>
-          <div>
-            <button (click)="analyze()" class="mt-3 bg-primary text-white"
+          <div class="d-flex mt-3">
+
+            <button [disabled]="!selectedDna" [class.bg-danger]="!selectedDna" (click)="analyze()" class=" bg-primary text-white d-inline"
                     mat-button>Analyze
             </button>
+            <div class="alert alert-danger d-inline mb-0" *ngIf="!selectedDna" role="alert">
+              Please select a dna
+            </div>
           </div>
         </form>
       </mat-step>
