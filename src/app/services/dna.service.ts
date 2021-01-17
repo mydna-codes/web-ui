@@ -97,4 +97,30 @@ export class DnaService {
       });
   }
 
+  public getByName(query: string, limit: number = 10, offset: number = 0){
+    let url = environment.backendUrl + environment.crudEndpoints.dna;
+    let nameQuery = "?filter=name:LIKE" + encodeURIComponent("%") + query + encodeURIComponent("%")
+    let params = new HttpParams().set('limit', limit.toString()).set('offset', offset.toString()).set("?filter", "name:LIKE%" + query + "%")
+    return this.httpClient.get(url, {observe: 'response', params: params})
+      .toPromise()
+      .then((res) => {
+
+        let entities = res.body as DnaEntity[]
+        let total = parseInt(res['headers'].get('X-Total-Count'))
+
+        return {
+          entities: entities,
+          total: total
+        }
+
+      })
+      .catch((err) => {
+        console.log('error fetching all genes', err);
+        return {
+          entities: [],
+          total: 0
+        };
+      });
+  }
+
 }

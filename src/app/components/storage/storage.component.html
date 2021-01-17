@@ -228,10 +228,10 @@
 
     <div class="form-inline">
       <div class="input-group">
-        <input style="border-right: 0" type="text" class="form-control" placeholder="Search"
+        <input #searchQuery style="border-right: 0" type="text" class="form-control" placeholder="Search"
                aria-describedby="button-addon2">
         <div class="input-group-append bg-white search-border">
-          <mat-icon class="mt-2"> search</mat-icon>
+          <mat-icon (click)="filter(searchQuery.value)" class="mt-2" style="cursor: pointer"> search</mat-icon>
         </div>
       </div>
 

@@ -230,4 +230,9 @@ export class StorageComponent implements OnInit {
     this.setEntityList(this.selectedEntityType)
 
   }
+
+  async filter(query){
+    let response = await this.dnaService.getByName(query, this.entitiesPerPage, 0)
+    console.log(response)
+  }
 }

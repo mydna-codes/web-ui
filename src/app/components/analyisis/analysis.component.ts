@@ -58,6 +58,8 @@ export class AnalysisComponent implements OnInit {
   public entitiesPerPage = 3
   public pageTotal = 1
 
+  public showAlert = false
+
   /* PERSISTENCE FOR HIGHLIGHTED ENTITIES */
   public highlightedIndexes: { 1: number[], 2: number[], 3: number[] } = {
     1: [],
@@ -80,20 +82,24 @@ export class AnalysisComponent implements OnInit {
 
   async ngOnInit() {
 
-    let dnaResponse = await this.dnaService.getAll()
+    let dnaResponse = await this.dnaService.getAll(0, this.entitiesPerPage)
     this.dnas = dnaResponse.entities
     this.totalDnas = dnaResponse.total
 
     this.setEntityList("dna")
     this.contentLoaded = true;
 
-    let enzymeResponse = await this.enzymeService.getAll()
+    let enzymeResponse = await this.enzymeService.getAll(0, this.entitiesPerPage)
     this.enzymes = enzymeResponse.entities
     this.totalEnzymes = enzymeResponse.total
 
-    let genesResponse = await this.geneService.getAll()
+    let genesResponse = await this.geneService.getAll(0, this.entitiesPerPage)
     this.genes = genesResponse.entities
     this.totalGenes = genesResponse.total
+
+    console.log(this.dnas, this.totalDnas)
+    console.log(this.enzymes, this.totalEnzymes)
+    console.log(this.genes, this.totalGenes)
 
   }
 
@@ -245,16 +251,21 @@ export class AnalysisComponent implements OnInit {
 
         /* parse data */
         let data = response.data.analyzeDna;
+
+
+        let dna = data.dna
         let genes = data.genes;
         let enzymes = data.enzymes;
 
-        console.log(response);
+        if(!dna || !genes || !enzymes){
+          console.log("invalid response", response)
+        }
 
         /* prepare data for drawing */
         let overlaps = this.combineOverlaps(genes);
 
         /* send data to iframe */
-        this.sendDataToIframeSource({type: 'create', dna: data.dna, enzymes: enzymes, overlaps: overlaps});
+        this.sendDataToIframeSource({type: 'create', dna: dna, enzymes: enzymes, overlaps: overlaps});
         this.showIframe = true;
 
       } else {
@@ -263,6 +274,7 @@ export class AnalysisComponent implements OnInit {
     } catch (e) {
       this.showIframe = false;
       console.log('error while preforming analysis', e);
+      this.showAlert = true
     }
 
   }

@@ -38,7 +38,7 @@
     <mat-nav-list style="position: absolute; bottom: 10pt">
 
 
-      <a mat-list-item routerLink="/storage" routerLinkActive="active">
+      <a mat-list-item (click)="logout()" routerLinkActive="active">
         <mat-icon color="primary" aria-hidden="false" aria-label="Example dashboard icon">logout</mat-icon>
         <span class="d-none d-lg-block">Log out</span>
       </a>

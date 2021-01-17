@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
     description: 'GRAPH DESCRIPTION'
   }
 
-  mainEntities = []
 
   lineChartLabels: Label[] = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun'];
 
